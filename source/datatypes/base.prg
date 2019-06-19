@@ -639,13 +639,13 @@ ENDDEFINE
 DEFINE CLASS oh_ValuesListType AS oh_Datatype
 
 	ValuesClass = "oh_StringType"
-	HIDDEN Element
 	Element = .NULL.
 
 	_SetXML = .T.
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="valuesclass" type="property" display="ValuesClass" />' + ;
+						'<memberdata name="element" type="property" display="Element" />' + ;
 						'</VFPData>'
 
 	FUNCTION PreInit ()
@@ -855,7 +855,7 @@ DEFINE CLASS oh_KeyValuePairType AS oh_Datatype
 		IF This.IsValid(m.KeyPart, m.ValuePart)
 			This.KeyId = m.KeyPart
 			This.Value = m.ValuePart
-			This.IsSet = .T.
+			This._IsSet = .T.
 		ELSE
 			This._IsSet = .F.
 		ENDIF
@@ -950,11 +950,19 @@ DEFINE CLASS oh_EnumerationType AS oh_Datatype
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="enumeration" type="property" display="Enumeration" />' + ;
 						'<memberdata name="_enumeration" type="property" display="_Enumeration" />' + ;
+						'<memberdata name="entries" type="property" display="Entries" />' + ;
 						'</VFPData>'
 
 	FUNCTION PreInit () AS Logical
 
+		LOCAL Entry AS String
+
 		ALINES(This.Enumeration, This._Enumeration, 0, ",")
+
+		This.AddProperty("Entries", CREATEOBJECT("Empty"))
+		FOR EACH m.Entry IN This.Enumeration
+			ADDPROPERTY(This.Entries, m.Entry, m.Entry)
+		ENDFOR
 
 	ENDFUNC
 

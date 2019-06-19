@@ -1,6 +1,6 @@
 # overHere
 ## Introduction
-overHere is an SDK that wraps access to [Here.com](https://www.here.com "Here.com") location platform resources for VFP applications. Functionalities like map imagery and enrichment, route calculation, and geocoding, are already available, with others to follow as the SDK keeps growing.
+overHere is an SDK that wraps access to the [Here.com](https://www.here.com "Here.com") location platform resources for VFP applications. Functionalities like map imagery and enrichment, route calculation, and geocoding, are already available, with others to follow as the SDK keeps growing.
 
 Invoking the services and fetching their responses is done through a set of classes that encapsulate the REST calls to Here.com servers.
 
@@ -20,6 +20,56 @@ In the examples folder, a few forms illustrate the use of the SDK.
 `Geocoder.scx` may provide information for `MapViewer.scx` and `Itineraries.scx` forms, so it may desirable to keep them open at the same time.
 
 In each one of these forms, the call to Here.com resources can be found in self-contained methods. A developer should read the code in `GetImage()`, `GetLocation()`, and `GetRoute()` methods to get a first understanding of the operation of overHere, and to take them as examples of how a VFP application can integrate Here.com resources.
+
+## Quick demo
+
+In this demo, a map of New York is displayed in the VFP main window using the Here.com MapView resource. It can be executed directly from the command window.
+
+**Install the libraries:**
+
+```foxpro
+DO LOCFILE(“here_api.prg”)
+DO mapview.prg
+```
+
+**Instantiate an overHere API manager and set your credentials:**
+
+```foxpro
+m.oh = CREATEOBJECT("overHere")
+m.oh.SetCredentials("{APP ID}", "{APP Code}")
+```
+
+**Instantiate a MapView object through the API manager:**
+
+```foxpro
+m.mv = m.oh.SetResource(“MapView”)
+```
+
+**Set location and map type parameters:**
+
+```foxpro
+m.mv.CountryName.Set(“USA”)
+m.mv.CityName.Set(“New York”)
+m.mv.MapScheme.Set(3)
+```
+
+**Create an image object in the VFP _Screen:**
+
+```foxpro
+_Screen.AddObject(“map”, “Image”)
+```
+
+**Fetch the map and load it into the image:**
+
+```foxpro
+_Screen.map.PictureVal = m.mv.GetImage(.T.)
+```
+
+**Display the image**
+
+```foxpro
+_Screen.map.Visible = .T.
+```
 
 ## Screenshots
 
