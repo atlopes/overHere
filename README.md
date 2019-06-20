@@ -28,7 +28,7 @@ In this demo, a map of New York is displayed in the VFP main window using the He
 **Install the libraries:**
 
 ```foxpro
-DO LOCFILE(“here_api.prg”)
+DO LOCFILE("here_api.prg")
 DO mapview.prg
 ```
 
@@ -42,21 +42,21 @@ m.oh.SetCredentials("{APP ID}", "{APP Code}")
 **Instantiate a MapView object through the API manager:**
 
 ```foxpro
-m.mv = m.oh.SetResource(“MapView”)
+m.mv = m.oh.SetResource("MapView")
 ```
 
 **Set location and map type parameters:**
 
 ```foxpro
-m.mv.CountryName.Set(“USA”)
-m.mv.CityName.Set(“New York”)
+m.mv.CountryName.Set("USA")
+m.mv.CityName.Set("New York")
 m.mv.MapScheme.Set(3)
 ```
 
 **Create an image object in the VFP _Screen:**
 
 ```foxpro
-_Screen.AddObject(“map”, “Image”)
+_Screen.AddObject("map", "Image")
 ```
 
 **Fetch the map and load it into the image:**
