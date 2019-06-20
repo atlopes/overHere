@@ -11,24 +11,16 @@ ENDIF
 DEFINE CLASS oh_LatitudeType AS oh_DoubleType
 
 	Precision = 7
-
-	FUNCTION IsValid (Input AS Double) AS Logical
-
-		RETURN oh_DoubleType::IsValid(m.Input) AND BETWEEN(m.Input, -90, 90)
-
-	ENDFUNC
+	Minimum = -90
+	Maximum = 90
 
 ENDDEFINE
 
 DEFINE CLASS oh_LongitudeType AS oh_DoubleType
 
 	Precision = 7
-
-	FUNCTION IsValid (Input AS Double) AS Logical
-
-		RETURN oh_DoubleType::IsValid(m.Input) AND BETWEEN(m.Input, -180, 180)
-
-	ENDFUNC
+	Minimum = -180
+	Maximum = 180
 
 ENDDEFINE
 
