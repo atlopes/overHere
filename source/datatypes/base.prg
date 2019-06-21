@@ -1019,6 +1019,53 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 
 ENDDEFINE
 
+DEFINE CLASS oh_DateType AS oh_Datatype
+
+	FUNCTION IsValid (Input AS Datetime) AS Logical
+
+		RETURN VARTYPE(m.Input) $ "DT" AND !EMPTY(m.Input)
+
+	ENDFUNC
+
+	FUNCTION Set (Input AS Date) AS Logical
+
+		IF This.IsValid(m.Input)
+			This.Value = IIF(VARTYPE(m.Input) == "D", m.Input, TTOD(m.Input))
+			This._IsSet = .T.
+		ELSE
+			This._IsSet = .F.
+		ENDIF
+
+		RETURN This._IsSet
+
+	ENDFUNC
+
+	FUNCTION Parse (Input AS String) AS Logical
+
+		LOCAL Dt AS Date
+
+		TRY
+			m.Dt = EVALUATE("{^" + LEFT(m.Input, 10) + "}")
+		CATCH
+			m.Dt = {}
+		ENDTRY
+
+		RETURN This.Set(m.Dt)
+
+	ENDFUNC
+
+	FUNCTION ToString () AS String
+
+		IF !This._IsSet
+			RETURN ""
+		ENDIF
+
+		RETURN LEFT(TTOC(This.Value, 3), 10)
+
+	ENDFUNC
+
+ENDDEFINE
+
 DEFINE CLASS oh_IntegerType AS oh_Datatype
 
 	Minimum = -2147483647

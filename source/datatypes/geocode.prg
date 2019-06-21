@@ -192,13 +192,13 @@ ENDDEFINE
 
 DEFINE CLASS oh_SearchResponseViewType AS oh_Structure
 
-	ViewId = ""
-	PerformedSearch = ""
+	ADD OBJECT ViewId AS oh_StringType
+	ADD OBJECT PerformedSearch AS oh_StringType
 
 	ADD OBJECT Results AS Collection
 
-	Members = '<member type="C" name="ViewId" />' + ;
-					'<member type="C" name="PerformedSearch" />' + ;
+	Members = '<member type="oh_StringType" name="ViewId" />' + ;
+					'<member type="oh_StringType" name="PerformedSearch" />' + ;
 					'<member type="collection:oh_SearchResultType" name="Results" element="Result" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -211,18 +211,18 @@ ENDDEFINE
 
 DEFINE CLASS oh_SearchResponseMetaInfoType AS oh_Structure
 
-	RequestId = ""
-	Timestamp = {:}
-	NextPage = 0
-	PreviousPage = 0
+	ADD OBJECT RequestId AS oh_StringType
+	ADD OBJECT Timestamp AS oh_DatetimeType
+	ADD OBJECT NextPage AS oh_IntegerType
+	ADD OBJECT PreviousPage AS oh_IntegerType
 
 	ADD OBJECT AdditionalData AS Collection
 
-	Members = '<member type="C" name="RequestId" />' + ;
-					'<member type="T" name="Timestamp" />' + ;
-					'<member type="I" name="NextPage" />' + ;
-					'<member type="I" name="PreviousPage" />' + ;
-					'<member type="keys:C" name="AdditionalData" key="@key" />'
+	Members = '<member type="oh_StringType" name="RequestId" />' + ;
+					'<member type="oh_DatetimeType" name="Timestamp" />' + ;
+					'<member type="oh_IntegerType" name="NextPage" />' + ;
+					'<member type="oh_IntegerType" name="PreviousPage" />' + ;
+					'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="requestid" type="property" display="RequestId" />' + ;
@@ -236,7 +236,7 @@ ENDDEFINE
 
 DEFINE CLASS oh_SearchResultType AS oh_Structure
 
-	Relevance = 0
+	ADD OBJECT Relevance AS oh_DoubleType
 	ADD OBJECT Distance AS oh_DistanceType
 	ADD OBJECT Direction AS oh_HeadingType
 	ADD OBJECT MatchLevel AS oh_MatchLevelType
@@ -248,7 +248,7 @@ DEFINE CLASS oh_SearchResultType AS oh_Structure
 
 	ADD OBJECT AdditionalData AS Collection
 
-	Members = '<member type="N" name="Relevance" />' + ;
+	Members = '<member type="oh_DoubleType" name="Relevance" />' + ;
 						'<member type="oh_DistanceType" name="Distance" />' + ;
 						'<member type="oh_HeadingType" name="Direction" />' + ;
 						'<member type="oh_MatchLevelType" name="MatchLevel" />' + ;
@@ -257,7 +257,7 @@ DEFINE CLASS oh_SearchResultType AS oh_Structure
 						'<member type="oh_LocationType" name="Location" />' + ;
 						'<member type="oh_PlaceType" name="Place" />' + ;
 						'<member type="oh_ParsedRequestType" name="ParsedRequest" />' + ;
-						'<member type="keys:C" name="AdditionalData" key="@key" />'
+						'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="relevance" type="property" display="Relevance" />' + ;
@@ -276,13 +276,13 @@ ENDDEFINE
 
 DEFINE CLASS oh_PlaceType AS oh_Structure
 
-	PlaceId = ""
-	PlaceName = ""
+	ADD OBJECT PlaceId AS oh_StringType
+	ADD OBJECT PlaceName AS oh_StringType
 	ADD OBJECT Category AS oh_CategoryType
 	ADD OBJECT Location AS oh_LocationType
 
-	Members = '<member type="C" name="PlaceId" />' + ;
-					'<member type="C" name="PlaceName" element="Name" />' + ;
+	Members = '<member type="oh_StringType" name="PlaceId" />' + ;
+					'<member type="oh_StringType" name="PlaceName" element="Name" />' + ;
 					'<member type="oh_CategoryType" name="Category" />' + ;
 					'<member type="oh_LocationType" name="Location" element="Locations" />'
 
@@ -309,9 +309,9 @@ ENDDEFINE
 
 DEFINE CLASS oh_BaseLocationType AS oh_Structure
 
-	LocationId = ""
+	ADD OBJECT LocationId AS oh_StringType
 	ADD OBJECT LocationType AS oh_LocationTypeType
-	LocationName = ""
+	ADD OBJECT LocationName AS oh_StringType
 	ADD OBJECT DisplayPosition AS oh_GeoCoordinateType
 	ADD OBJECT NavigationPosition AS oh_GeoCoordinateType
 	ADD OBJECT MapView AS oh_GeoBoundingBoxType
@@ -325,9 +325,9 @@ DEFINE CLASS oh_BaseLocationType AS oh_Structure
 
 	ADD OBJECT AdditionalData AS Collection
 
-	Members = '<member type="C" name="LocationId" />' + ;
+	Members = '<member type="oh_StringType" name="LocationId" />' + ;
 					'<member type="oh_LocationTypeType" name="LocationType" />' + ;
-					'<member type="C" name="LocationName" element="Name" />' + ;
+					'<member type="oh_StringType" name="LocationName" element="Name" />' + ;
 					'<member type="oh_GeoCoordinateType" name="DisplayPosition" />' + ;
 					'<member type="oh_GeoCoordinateType" name="NavigationPosition" />' + ;
 					'<member type="oh_GeoBoundingBoxType" name="MapView" />' + ;
@@ -338,7 +338,7 @@ DEFINE CLASS oh_BaseLocationType AS oh_Structure
 					'<member type="oh_MapReferenceType" name="MapReference" />' + ;
 					'<member type="oh_LinkInfoType" name="LinkInfo" />' + ;
 					'<member type="oh_AdminInfoType" name="AdminInfo" />' + ;
-					'<member type="keys:C" name="AdditionalData" key="@key" />'
+					'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="locationid" type="property" display="LocationId" />' + ;
@@ -362,27 +362,27 @@ ENDDEFINE
 
 DEFINE CLASS oh_MatchQualityType AS oh_Structure
 
-	Country = 0
-	State = 0
-	County = 0
-	City = 0
-	District = 0
-	SubDistrict = 0
+	ADD OBJECT Country AS oh_DoubleType
+	ADD OBJECT State AS oh_DoubleType
+	ADD OBJECT County AS oh_DoubleType
+	ADD OBJECT City AS oh_DoubleType
+	ADD OBJECT District AS oh_DoubleType
+	ADD OBJECT SubDistrict AS oh_DoubleType
 	DIMENSION Street(1)
-	HouseNumber = 0
-	PostalCode = 0
-	Building = 0
+	ADD OBJECT HouseNumber AS oh_DoubleType
+	ADD OBJECT PostalCode AS oh_DoubleType
+	ADD OBJECT Building AS oh_DoubleType
 
-	Members = '<member type="N" name="Country" />' + ;
-					'<member type="N" name="State" />' + ;
-					'<member type="N" name="County" />' + ;
-					'<member type="N" name="City" />' + ;
-					'<member type="N" name="District" />' + ;
-					'<member type="N" name="SubDistrict" />' + ;
-					'<member type="array:N" name="Street" />' + ;
-					'<member type="N" name="HouseNumber" />' + ;
-					'<member type="N" name="PostalCode" />' + ;
-					'<member type="N" name="Building" />'
+	Members = '<member type="oh_DoubleType" name="Country" />' + ;
+					'<member type="oh_DoubleType" name="State" />' + ;
+					'<member type="oh_DoubleType" name="County" />' + ;
+					'<member type="oh_DoubleType" name="City" />' + ;
+					'<member type="oh_DoubleType" name="District" />' + ;
+					'<member type="oh_DoubleType" name="SubDistrict" />' + ;
+					'<member type="array:oh_DoubleType" name="Street" />' + ;
+					'<member type="oh_DoubleType" name="HouseNumber" />' + ;
+					'<member type="oh_DoubleType" name="PostalCode" />' + ;
+					'<member type="oh_DoubleType" name="Building" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="country" type="property" display="Country" />' + ;
@@ -401,16 +401,16 @@ ENDDEFINE
 
 DEFINE CLASS oh_ParsedRequestType AS oh_BaseAddressType
 
-	LandmarkName = ""
-	Label = ""
-	AddressLine = ""
+	ADD OBJECT LandmarkName AS oh_StringType
+	ADD OBJECT Label AS oh_StringType
+	ADD OBJECT AddressLine AS oh_StringType
 
 	ADD OBJECT AdditionalData AS Collection
 
-	AdditionalMembers = '<member type="C" name="LandmarkName" element="Name" />' + ;
-								'<member type="C" name="Label" />' + ;
-								'<member type="C" name="AddressLine" />' + ;
-								'<member type="keys:C" name="AdditionalData" key="@key" />'
+	AdditionalMembers = '<member type="oh_StringType" name="LandmarkName" element="Name" />' + ;
+								'<member type="oh_StringType" name="Label" />' + ;
+								'<member type="oh_StringType" name="AddressLine" />' + ;
+								'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="landmarkname" type="property" display="LandmarkName" />' + ;
@@ -423,16 +423,16 @@ ENDDEFINE
 
 DEFINE CLASS oh_AddressType AS oh_BaseAddressType
 
-	Label = ""
+	ADD OBJECT Label AS oh_StringType
 	ADD OBJECT DistanceMarker AS oh_DistanceMarkerType
-	AddressLine = ""
+	ADD OBJECT AddressLine AS oh_StringType
 
 	ADD OBJECT AdditionalData AS Collection
 
-	AdditionalMembers = '<member type="C" name="Label" />' + ;
+	AdditionalMembers = '<member type="oh_StringType" name="Label" />' + ;
 								'<member type="oh_DistanceMarkerType" name="DistanceMarker" />' + ;
-								'<member type="C" name="AddressLine" />' + ;
-								'<member type="keys:C" name="AdditionalData" key="@key" />'
+								'<member type="oh_StringType" name="AddressLine" />' + ;
+								'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="label" type="property" display="Label" />' + ;
@@ -445,15 +445,15 @@ ENDDEFINE
 
 DEFINE CLASS oh_DistanceMarkerType AS oh_Structure
 
-	Value = ""
-	Offset = 0
+	ADD OBJECT Value AS oh_StringType
+	ADD OBJECT Offset AS oh_DoubleType
 	ADD OBJECT Unit AS oh_DistanceUnitType
-	DirectionOnSign = ""
+	ADD OBJECT DirectionOnSign AS oh_StringType
 
-	Members = '<member type="C" name="Value" />' + ;
-					'<member type="N" name="Offset" />' + ;
+	Members = '<member type="oh_StringType" name="Value" />' + ;
+					'<member type="oh_DoubleType" name="Offset" />' + ;
 					'<member type="oh_DistanceUnitType" name="Unit" />' + ;
-					'<member type="C" name="DirectionOnSign" />'
+					'<member type="oh_StringType" name="DirectionOnSign" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="value" type="property" display="Value" />' + ;
@@ -466,10 +466,10 @@ ENDDEFINE
 
 DEFINE CLASS oh_AddressDetailsType AS oh_BaseAddressType
 
-	CountryCode = ""
+	ADD OBJECT CountryCode AS oh_StringType
 	ADD OBJECT StreetDetails AS oh_StreetDetailsType
 
-	AdditionalMembers = '<member type="C" name="CountryCode" />' + ;
+	AdditionalMembers = '<member type="oh_StringType" name="CountryCode" />' + ;
 								'<member type="oh_StreetDetailsType" name="StreetDetails" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -481,21 +481,21 @@ ENDDEFINE
 
 DEFINE CLASS oh_StreetDetailsType AS oh_Structure
 
-	BaseName = ""
-	StreetType = ""
-	StreetTypeBefore = ""
-	StreetTypeAttached = ""
-	Prefix = ""
-	Suffix = ""
-	Direction = ""
+	ADD OBJECT BaseName AS oh_StringType
+	ADD OBJECT StreetType AS oh_StringType
+	ADD OBJECT StreetTypeBefore AS oh_StringType
+	ADD OBJECT StreetTypeAttached AS oh_StringType
+	ADD OBJECT Prefix AS oh_StringType
+	ADD OBJECT Suffix AS oh_StringType
+	ADD OBJECT Direction AS oh_StringType
 
-	Members = '<member type="C" name="BaseName" />' + ;
-					'<member type="C" name="StreetType" />' + ;
-					'<member type="C" name="StreetTypeBefore" />' + ;
-					'<member type="C" name="StreetTypeAttached" />' + ;
-					'<member type="C" name="Prefix" />' + ;
-					'<member type="C" name="Suffix" />' + ;
-					'<member type="C" name="Direction" />'
+	Members = '<member type="oh_StringType" name="BaseName" />' + ;
+					'<member type="oh_StringType" name="StreetType" />' + ;
+					'<member type="oh_StringType" name="StreetTypeBefore" />' + ;
+					'<member type="oh_StringType" name="StreetTypeAttached" />' + ;
+					'<member type="oh_StringType" name="Prefix" />' + ;
+					'<member type="oh_StringType" name="Suffix" />' + ;
+					'<member type="oh_StringType" name="Direction" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="basename" type="property" display="BaseName" />' + ;
@@ -511,35 +511,35 @@ ENDDEFINE
 
 DEFINE CLASS oh_MapReferenceType AS oh_Structure
 
-	ReferenceId = ""
-	MapVersion = ""
-	MapReleaseDate = {}
-	MapId = ""
-	Spot= 0
+	ADD OBJECT ReferenceId AS oh_StringType
+	ADD OBJECT MapVersion AS oh_StringType
+	ADD OBJECT MapReleaseDate AS oh_DateType
+	ADD OBJECT MapId AS oh_StringType
+	ADD OBJECT Spot AS oh_IntegerType
 	ADD OBJECT SideOfStreet AS oh_SideOfStreetType
-	CountryId = ""
-	StateId = ""
-	CountyId = ""
-	CityId = ""
-	DistrictId = ""
-	RoadLinkId = ""
-	BuildingId = ""
-	AddressId = ""
+	ADD OBJECT CountryId AS oh_StringType
+	ADD OBJECT StateId AS oh_StringType
+	ADD OBJECT CountyId AS oh_StringType
+	ADD OBJECT CityId AS oh_StringType
+	ADD OBJECT DistrictId AS oh_StringType
+	ADD OBJECT RoadLinkId AS oh_StringType
+	ADD OBJECT BuildingId AS oh_StringType
+	ADD OBJECT AddressId AS oh_StringType
 
-	Members = '<member name="ReferenceId" type="C" />' + ;
-					'<member name="MapVersion" type="C" />' + ;
-					'<member name="MapReleaseDate" type="date" />' + ;
-					'<member name="MapId" type="C" />' + ;
-					'<member name="Spot" type="I" />' + ;
+	Members = '<member name="ReferenceId" type="oh_StringType" />' + ;
+					'<member name="MapVersion" type="oh_StringType" />' + ;
+					'<member name="MapReleaseDate" type="oh_DateType" />' + ;
+					'<member name="MapId" type="oh_StringType" />' + ;
+					'<member name="Spot" type="oh_IntegerType" />' + ;
 					'<member name="SideOfStreet" type="oh_SideOfStreetType" />' + ;
-					'<member name="CountryId" type="C" />' + ;
-					'<member name="StateId" type="C" />' + ;
-					'<member name="CountyId" type="C" />' + ;
-					'<member name="CityId" type="C" />' + ;
-					'<member name="DistrictId" type="C" />' + ;
-					'<member name="RoadLinkId" type="C" />' + ;
-					'<member name="BuildingId" type="C" />' + ;
-					'<member name="AddressId" type="C" />'
+					'<member name="CountryId" type="oh_StringType" />' + ;
+					'<member name="StateId" type="oh_StringType" />' + ;
+					'<member name="CountyId" type="oh_StringType" />' + ;
+					'<member name="CityId" type="oh_StringType" />' + ;
+					'<member name="DistrictId" type="oh_StringType" />' + ;
+					'<member name="RoadLinkId" type="oh_StringType" />' + ;
+					'<member name="BuildingId" type="oh_StringType" />' + ;
+					'<member name="AddressId" type="oh_StringType" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="referenceid" type="property" display="ReferenceId" />' + ;
@@ -566,7 +566,7 @@ DEFINE CLASS oh_LinkInfoType AS oh_Structure
 	ADD OBJECT TravelDirection AS oh_CardinalDirectionType
 	ADD OBJECT SpeedCategory AS oh_SpeedCategoryType
 	ADD OBJECT SpeedLimit AS oh_SpeedLimitType
-	Traffic = ""
+	ADD OBJECT Traffic AS oh_StringType
 	ADD OBJECT LinkFlags AS Collection
 	ADD OBJECT AcessFlags AS Collection
 
@@ -574,7 +574,7 @@ DEFINE CLASS oh_LinkInfoType AS oh_Structure
 					'<member name="TravelDirection" type="oh_CardinalDirectionType" />' + ;
 					'<member name="SpeedCategory" type="oh_SpeedCategoryType" />' + ;
 					'<member name="SpeedLimit" type="oh_SpeedLimitType" />' + ;
-					'<member name="Traffic" type="C" />' + ;
+					'<member name="Traffic" type="oh_StringType" />' + ;
 					'<member name="LinkFlags" type="list:oh_LinkFlagType" />' + ;
 					'<member name="AcessFlags" type="list:oh_LinkAccessFlagType" />'
 
@@ -592,14 +592,14 @@ ENDDEFINE
 
 DEFINE CLASS oh_AdminInfoType AS oh_Structure
 
-	LocalTime = {:}
+	ADD OBJECT LocalTime AS oh_DatetimeType
 	ADD OBJECT UTCTimezoneOffset AS oh_UTCTimeOffsetType
 	ADD OBJECT Currency AS oh_CurrencyType
 	ADD OBJECT DrivingSide AS oh_DrivingSideType
 	ADD OBJECT SystemOfMeasure AS oh_SystemOfMeasurementType
 	ADD OBJECT Timezone AS oh_TimezoneType
 
-	Members = '<member name="LocalTime" type="T" />' + ;
+	Members = '<member name="LocalTime" type="oh_DatetimeType" />' + ;
 					'<member name="UTCTimezoneOffset" type="oh_UTCTimeOffsetType" />' + ;
 					'<member name="Currency" type="oh_CurrencyType" />' + ;
 					'<member name="DrivingSide" type="oh_DrivingSideType" />' + ;
@@ -619,25 +619,25 @@ ENDDEFINE
 
 DEFINE CLASS oh_TimezoneType AS oh_Structure
 
-	Id = ""
-	Offset = 0
-	RawOffset = 0
-	NameShort = ""
-	NameLong = ""
-	NameDstShort = ""
-	NameDstLong = ""
-	InDaylightTime = .F.
-	DstSavings = 0
+	ADD OBJECT Id AS oh_StringType
+	ADD OBJECT Offset AS oh_IntegerType
+	ADD OBJECT RawOffset AS oh_IntegerType
+	ADD OBJECT NameShort AS oh_StringType
+	ADD OBJECT NameLong AS oh_StringType
+	ADD OBJECT NameDstShort AS oh_StringType
+	ADD OBJECT NameDstLong AS oh_StringType
+	ADD OBJECT InDaylightTime AS oh_BooleanType
+	ADD OBJECT DstSavings AS oh_IntegerType
 
-	Members = '<member name="Id" type="C" />' + ;
-					'<member name="Offset" type="I" />' + ;
-					'<member name="RawOffset" type="I" />' + ;
-					'<member name="NameShort" type="C" />' + ;
-					'<member name="NameLong" type="C" />' + ;
-					'<member name="NameDstShort" type="C" />' + ;
-					'<member name="NameDstLong" type="C" />' + ;
-					'<member name="InDaylightTime" type="L" />' + ;
-					'<member name="DstSavings" type="I" />'
+	Members = '<member name="Id" type="oh_StringType" />' + ;
+					'<member name="Offset" type="oh_IntegerType" />' + ;
+					'<member name="RawOffset" type="oh_IntegerType" />' + ;
+					'<member name="NameShort" type="oh_StringType" />' + ;
+					'<member name="NameLong" type="oh_StringType" />' + ;
+					'<member name="NameDstShort" type="oh_StringType" />' + ;
+					'<member name="NameDstLong" type="oh_StringType" />' + ;
+					'<member name="InDaylightTime" type="oh_BooleanType" />' + ;
+					'<member name="DstSavings" type="oh_IntegerType" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="id" type="property" display="Id" />' + ;
@@ -657,13 +657,13 @@ DEFINE CLASS oh_RelatedLocationType AS oh_Structure
 
 	ADD OBJECT Type AS oh_RelationshipType
 	ADD OBJECT MatchType AS oh_MatchTypeType
-	RouteDistance = 0
+	ADD OBJECT RouteDistance AS oh_DoubleType
 	ADD OBJECT Direction AS oh_HeadingType
 	ADD OBJECT Location AS oh_BaseLocationType
 
 	Members = '<member name="Type" type="oh_RelationshipType" />' + ;
 					'<member name="MatchType" type="oh_MatchTypeType" />' + ;
-					'<member name="RouteDistance" type="N" />' + ;
+					'<member name="RouteDistance" type="oh_DoubleType" />' + ;
 					'<member name="Direction" type="oh_HeadingType" />' + ;
 					'<member name="Location" type="oh_BaseLocationType" />'
 
@@ -709,27 +709,27 @@ ENDDEFINE
 
 DEFINE CLASS oh_BaseAddressType AS oh_Structure
 
-	Country = ""
-	State = ""
-	County = ""
-	City = ""
-	District = ""
-	SubDistrict = ""
-	Street = ""
-	HouseNumber = ""
-	PostalCode = ""
-	Building = ""
+	ADD OBJECT Country AS oh_StringType
+	ADD OBJECT State AS oh_StringType
+	ADD OBJECT County AS oh_StringType
+	ADD OBJECT City AS oh_StringType
+	ADD OBJECT District AS oh_StringType
+	ADD OBJECT SubDistrict AS oh_StringType
+	ADD OBJECT Street AS oh_StringType
+	ADD OBJECT HouseNumber AS oh_StringType
+	ADD OBJECT PostalCode AS oh_StringType
+	ADD OBJECT Building AS oh_StringType
 
-	Members = '<member name="Country" type="C" />' + ;
-					'<member name="State" type="C" />' + ;
-					'<member name="County" type="C" />' + ;
-					'<member name="City" type="C" />' + ;
-					'<member name="District" type="C" />' + ;
-					'<member name="SubDistrict" type="C"/>' + ;
-					'<member name="Street" type="C" />' + ;
-					'<member name="HouseNumber" type="C" />' + ;
-					'<member name="PostalCode" type="C" />' + ;
-					'<member name="Building" type="C" />'
+	Members = '<member name="Country" type="oh_StringType" />' + ;
+					'<member name="State" type="oh_StringType" />' + ;
+					'<member name="County" type="oh_StringType" />' + ;
+					'<member name="City" type="oh_StringType" />' + ;
+					'<member name="District" type="oh_StringType" />' + ;
+					'<member name="SubDistrict" type="oh_StringType"/>' + ;
+					'<member name="Street" type="oh_StringType" />' + ;
+					'<member name="HouseNumber" type="oh_StringType" />' + ;
+					'<member name="PostalCode" type="oh_StringType" />' + ;
+					'<member name="Building" type="oh_StringType" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="country" type="property" display="Country" />' + ;
@@ -748,11 +748,11 @@ ENDDEFINE
 
 DEFINE CLASS oh_CategoryType AS oh_Structure
 
-	CategoryId = 0
-	CategorySystemId = ""
+	ADD OBJECT CategoryId AS oh_IntegerType
+	ADD OBJECT CategorySystemId AS oh_StringType
 
-	Members = '<member type="I" name="CategoryId" />' + ;
-					'<member type="C" name="CategorySystemId" />'
+	Members = '<member type="oh_IntegerType" name="CategoryId" />' + ;
+					'<member type="oh_StringType" name="CategorySystemId" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="categoryid" type="property" display="CategoryId" />' + ;

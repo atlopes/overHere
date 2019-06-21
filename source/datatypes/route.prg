@@ -955,19 +955,19 @@ ENDDEFINE
 
 DEFINE CLASS oh_RouteResponseMetaInfoType AS oh_Structure
 
-	RequestId = ""
-	Timestamp = {:}
-	MapVersion = ""
-	AvailableMapVersion = ""
-	ModuleVersion = ""
-	InterfaceVersion = ""
+	ADD OBJECT RequestId AS oh_StringType
+	ADD OBJECT Timestamp AS oh_DatetimeType
+	ADD OBJECT MapVersion AS oh_StringType
+	ADD OBJECT AvailableMapVersion AS oh_StringType
+	ADD OBJECT ModuleVersion AS oh_StringType
+	ADD OBJECT InterfaceVersion AS oh_StringType
 
-	Members = '<member type="C" name="RequestId" />' + ;
-					'<member type="T" name="Timestamp" />' + ;
-					'<member type="C" name="MapVersion" />' + ;
-					'<member type="C" name="AvailableMapVersion" />' + ;
-					'<member type="C" name="ModuleVersion" />' + ;
-					'<member type="C" name="InterfaceVersion" />'
+	Members = '<member type="oh_StringType" name="RequestId" />' + ;
+					'<member type="oh_DatetimeType" name="Timestamp" />' + ;
+					'<member type="oh_StringType" name="MapVersion" />' + ;
+					'<member type="oh_StringType" name="AvailableMapVersion" />' + ;
+					'<member type="oh_StringType" name="ModuleVersion" />' + ;
+					'<member type="oh_StringType" name="InterfaceVersion" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="requestid" type="property" display="RequestId" />' + ;
@@ -982,7 +982,7 @@ ENDDEFINE
 
 DEFINE CLASS oh_RouteType AS oh_Structure
 
-	RouteId = ""
+	ADD OBJECT RouteId AS oh_StringType
 	ADD OBJECT Waypoints AS Collection && OF oh_WaypointType
 	ADD OBJECT Mode AS oh_RoutingModeType
 	ADD OBJECT Shape AS oh_GeoPolylineType
@@ -996,11 +996,11 @@ DEFINE CLASS oh_RouteType AS oh_Structure
 	ADD OBJECT Generalizations AS Collection && OF oh_GeneralizationType
 	ADD OBJECT ManeuverGroup AS Collection && OF oh_ManeuverGroupType
 	ADD OBJECT Incident AS oh_IncidentType
-	Label = ""
+	ADD OBJECT Label AS oh_StringType
 	ADD OBJECT Zone AS oh_RoutingZoneType
 	ADD OBJECT TimeDependentRestriction AS oh_TimeDependentRestrictionType
 
-	Members = '<member type="C" name="RouteId" />' + ;
+	Members = '<member type="oh_StringType" name="RouteId" />' + ;
 					'<member type="collection:oh_WaypointType" name="Waypoints" element="Waypoint" />' + ;
 					'<member type="oh_RoutingModeType" name="Mode" />' + ;
 					'<member type="oh_GeoPolylineType" name="Shape" />' + ;
@@ -1014,7 +1014,7 @@ DEFINE CLASS oh_RouteType AS oh_Structure
 					'<member type="collection:oh_GeneralizationType" name="Generalizations" />' + ;
 					'<member type="collection:oh_ManeuverGroupType" name="ManeuverGroup" />' + ;
 					'<member type="oh_IncidentType" name="Incident" />' + ;
-					'<member type="C" name="Label" />' + ;
+					'<member type="oh_StringType" name="Label" />' + ;
 					'<member type="oh_RoutingZoneType" name="Zone" />' + ;
 					'<member type="oh_TimeDependentRestrictionType" name="TimeDependentRestriction" />'
 
@@ -1046,23 +1046,23 @@ DEFINE CLASS oh_WaypointType AS oh_Structure
 	ADD OBJECT MappedPosition AS oh_GeoCoordinateType
 	ADD OBJECT OriginalPosition AS oh_GeoCoordinateType
 	ADD OBJECT Type AS oh_WaypointTypeType
-	Spot = 0.0
+	ADD OBJECT Spot AS oh_DoubleType
 	ADD OBJECT SideOfStreet AS oh_SideOfStreetType
-	MappedRoadName = ""
-	Label = ""
-	UserLabel = ""
-	ShapeIndex = 0
+	ADD OBJECT MappedRoadName AS oh_StringType
+	ADD OBJECT Label AS oh_StringType
+	ADD OBJECT UserLabel AS oh_StringType
+	ADD OBJECT ShapeIndex AS oh_IntegerType
 
 	Members = '<member type="oh_LinkIdType" name="LinkId" />' + ;
 					'<member type="oh_GeoCoordinateType" name="MappedPosition" />' + ;
 					'<member type="oh_GeoCoordinateType" name="OriginalPosition" />' + ;
 					'<member type="oh_WaypointParameterTypeType" name="Type" />' + ;
-					'<member type="N" name="Spot" />' + ;
+					'<member type="oh_DoubleType" name="Spot" />' + ;
 					'<member type="oh_SideOfStreetType" name="SideOfStreet" />' + ;
-					'<member type="C" name="MappedRoadName" />' + ;
-					'<member type="C" name="Label" />' + ;
-					'<member type="C" name="UserLabel" />' + ;
-					'<member type="I" name="ShapeIndex" />'
+					'<member type="oh_StringType" name="MappedRoadName" />' + ;
+					'<member type="oh_StringType" name="Label" />' + ;
+					'<member type="oh_StringType" name="UserLabel" />' + ;
+					'<member type="oh_IntegerType" name="ShapeIndex" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="linkid" type="property" display="LinkId" />' + ;
@@ -1089,8 +1089,8 @@ DEFINE CLASS oh_RouteLegType AS oh_Structure
 	ADD OBJECT Links AS oh_LinkIdsListType
 	ADD OBJECT BoundingBox AS oh_GeoBoundingBoxType
 	ADD OBJECT Shape AS oh_GeoPolylineType
-	FirstPoint = 0
-	LastPoint = 0
+	ADD OBJECT FirstPoint AS oh_IntegerType
+	ADD OBJECT LastPoint AS oh_IntegerType
 	ADD OBJECT TrafficTime AS oh_DurationType
 	ADD OBJECT BaseTime AS oh_DurationType
 	ADD OBJECT Summary AS oh_RouteSummaryType
@@ -1104,8 +1104,8 @@ DEFINE CLASS oh_RouteLegType AS oh_Structure
 					'<member type="oh_LinkIdsListType" name="Links" />' + ;
 					'<member type="oh_GeoBoundingBoxType" name="BoundingBox" />' + ;
 					'<member type="oh_GeoPolylineType" name="Shape" />' + ;
-					'<member type="I" name="FirstPoint" />' + ;
-					'<member type="I" name="LastPoint" />' + ;
+					'<member type="oh_IntegerType" name="FirstPoint" />' + ;
+					'<member type="oh_IntegerType" name="LastPoint" />' + ;
 					'<member type="oh_DurationType" name="TrafficTime" />' + ;
 					'<member type="oh_DurationType" name="BaseTime" />' + ;
 					'<member type="oh_RouteSummaryType" name="Summary" />' + ;
@@ -1132,32 +1132,32 @@ ENDDEFINE
 
 DEFINE CLASS oh_ManeuverType AS oh_Structure
 
-	id = ""
+	ADD OBJECT id AS oh_StringType
 	ADD OBJECT Position AS oh_GeoCoordinateType
-	Instruction = ""
+	ADD OBJECT Instruction AS oh_StringType
 	ADD OBJECT TravelTime AS oh_DurationType
 	ADD OBJECT Length AS oh_DistanceType
 	ADD OBJECT Shape AS oh_GeoPolylineType
-	FirstPoint = 0
-	LastPoint = 0
-	Time = {:}
+	ADD OBJECT FirstPoint AS oh_IntegerType
+	ADD OBJECT LastPoint AS oh_IntegerType
+	ADD OBJECT Time AS oh_DatetimeType
 	ADD OBJECT Note AS oh_RouteNoteType	
-	NextManeuver = ""
+	ADD OBJECT NextManeuver AS oh_StringType
 	ADD OBJECT ToLink AS oh_LinkIdType
 	ADD OBJECT BoundingBox AS oh_GeoBoundingBoxType
 	ADD OBJECT ShapeQuality AS oh_ShapeQualityType 
 
-	Members = '<member type="attribute:C" name="id" />' + ;
+	Members = '<member type="attribute:oh_StringType" name="id" />' + ;
 					'<member type="oh_GeoCoordinateType" name="Position" />' + ;
-					'<member type="C" name="Instruction" />' + ;
+					'<member type="oh_StringType" name="Instruction" />' + ;
 					'<member type="oh_DurationType" name="TravelTime" />' + ;
 					'<member type="oh_DistanceType" name="Length" />' + ;
 					'<member type="oh_GeoPolylineType" name="Shape" />' + ;
-					'<member type="I" name="FirstPoint" />' + ;
-					'<member type="I" name="LastPoint" />' + ;
-					'<member type="T" name="Time" />' + ;
+					'<member type="oh_IntegerType" name="FirstPoint" />' + ;
+					'<member type="oh_IntegerType" name="LastPoint" />' + ;
+					'<member type="oh_DatetimeType" name="Time" />' + ;
 					'<member type="oh_RouteNoteType" name="Note" />' + ;
-					'<member type="C" name="NextManeuver" />' + ;
+					'<member type="oh_StringType" name="NextManeuver" />' + ;
 					'<member type="oh_LinkIdType" name="ToLink" />' + ;
 					'<member type="oh_GeoBoundingBoxType" name="BoundingBox" />' + ;
 					'<member type="oh_ShapeQualityType" name="ShapeQuality" />'
@@ -1183,20 +1183,20 @@ ENDDEFINE
 
 DEFINE CLASS oh_ManeuverGroupType AS oh_Structure
 
-	firstmaneuver = ""
-	lastmaneuver = ""
+	ADD OBJECT firstmaneuver AS oh_StringType
+	ADD OBJECT lastmaneuver AS oh_StringType
 	ADD OBJECT mode AS oh_RoutingModeType
-	summaryDescription = ""
-	arrivalDescription = ""
-	waitDescription = ""
+	ADD OBJECT summaryDescription AS oh_StringType
+	ADD OBJECT arrivalDescription AS oh_StringType
+	ADD OBJECT waitDescription AS oh_StringType
 	ADD OBJECT publicTransportType AS oh_PublicTransportTypeType
 
-	Members = '<member type="C" name="firstmaneuver" />' + ;
-					'<member type="C" name="lastmaneuver" />' + ;
+	Members = '<member type="oh_StringType" name="firstmaneuver" />' + ;
+					'<member type="oh_StringType" name="lastmaneuver" />' + ;
 					'<member type="oh_RoutingModeType" name="mode" />' + ;
-					'<member type="C" name="summaryDescription" />' + ;
-					'<member type="C" name="arrivalDescription" />' + ;
-					'<member type="C" name="waitDescription" />' + ;
+					'<member type="oh_StringType" name="summaryDescription" />' + ;
+					'<member type="oh_StringType" name="arrivalDescription" />' + ;
+					'<member type="oh_StringType" name="waitDescription" />' + ;
 					'<member type="oh_PublicTransportTypeType" name="publicTransportType" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -1213,19 +1213,19 @@ ENDDEFINE
 
 DEFINE CLASS oh_IncidentType AS oh_Structure
 
-	ValidityPeriod = ""
-	Text = ""
+	ADD OBJECT ValidityPeriod AS oh_StringType
+	ADD OBJECT Text AS oh_StringType
 	ADD OBJECT Type AS oh_IncidentTypeType
-	Criticality = 0
-	FirstPoint = 0
-	LastPoint = 0
+	ADD OBJECT Criticality AS oh_IntegerType
+	ADD OBJECT FirstPoint AS oh_IntegerType
+	ADD OBJECT LastPoint AS oh_IntegerType
 
-	Members = '<member type="C" name="ValidityPeriod" />' + ;
-					'<member type="C" name="Text" />' + ;
+	Members = '<member type="oh_StringType" name="ValidityPeriod" />' + ;
+					'<member type="oh_StringType" name="Text" />' + ;
 					'<member type="oh_IncidentTypeType" name="Type" />' + ;
-					'<member type="I" name="Criticality" />' + ;
-					'<member type="I" name="FirstPoint" />' + ;
-					'<member type="I" name="LastPoint" />'
+					'<member type="oh_IntegerType" name="Criticality" />' + ;
+					'<member type="oh_IntegerType" name="FirstPoint" />' + ;
+					'<member type="oh_IntegerType" name="LastPoint" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="validityperiod" type="property" display="ValidityPeriod" />' + ;
@@ -1245,16 +1245,16 @@ DEFINE CLASS oh_RouteSummaryType AS oh_Structure
 	ADD OBJECT BaseTime AS oh_DurationType
 	ADD OBJECT Flags AS Collection && OF oh_RouteLinkFlagType
 	ADD OBJECT TravelTime AS oh_DurationType
-	Text = ""
-	Co2Emission = 0.0
+	ADD OBJECT Text AS oh_StringType
+	ADD OBJECT Co2Emission AS oh_DoubleType
 
 	Members = '<member type="oh_DistanceType" name="Distance" />' + ;
 					'<member type="oh_DurationType" name="TrafficTime" />' + ;
 					'<member type="oh_DurationType" name="BaseTime" />' + ;
 					'<member type="collection:oh_RouteLinkFlagType" name="Flags" />' + ;
 					'<member type="oh_DurationType" name="TravelTime" />' + ;
-					'<member type="C" name="Text" />' + ;
-					'<member type="N" name="Co2Emission" />'
+					'<member type="oh_StringType" name="Text" />' + ;
+					'<member type="oh_DoubleType" name="Co2Emission" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="distance" type="property" display="Distance" />' + ;
@@ -1272,13 +1272,13 @@ DEFINE CLASS oh_RouteNoteType AS oh_Structure
 
 	ADD OBJECT Type AS oh_RouteNoteTypeType
 	ADD OBJECT Code AS oh_RouteNoteCodeType
-	Text = ""
+	ADD OBJECT Text AS oh_StringType
 	ADD OBJECT AdditionalData AS Collection && OF C
 	ADD OBJECT CountryChangeDetails AS oh_CountryChangeDetailsType
 
 	Members = '<member type="oh_RouteNoteTypeType" name="Type" />' + ;
 					'<member type="oh_RouteNoteCodeType" name="Code" />' + ;
-					'<member type="C" name="Text" />' + ;
+					'<member type="oh_StringType" name="Text" />' + ;
 					'<member type="collection:C" name="AdditionalData" />' + ;
 					'<member type="oh_CountryChangeDetailsType" name="CountryChangeDetails" />'
 
@@ -1294,9 +1294,9 @@ ENDDEFINE
 
 DEFINE CLASS oh_CountryChangeDetailsType AS oh_Structure
 
-	ToCountry = ""
+	ADD OBJECT ToCountry AS oh_StringType
 
-	Members = '<member type="C" name="ToCountry" />'
+	Members = '<member type="oh_StringType" name="ToCountry" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="tocountry" type="property" display="ToCountry" />' + ;
@@ -1306,10 +1306,10 @@ ENDDEFINE
 
 DEFINE CLASS oh_PublicTransportTicketsType AS oh_Structure
 
-	ID = ""
+	ADD OBJECT ID AS oh_StringType
 	ADD OBJECT PublicTransportTickets AS Collection && OF oh_PublicTransportTicketType
 
-	Members = '<member type="C" name="ID" />' + ;
+	Members = '<member type="oh_StringType" name="ID" />' + ;
 					'<member type="collection:oh_PublicTransportTicketType" name="PublicTransportTickets" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -1321,15 +1321,15 @@ ENDDEFINE
 
 DEFINE CLASS oh_PublicTransportTicketType AS oh_Structure
 
-	ID = ""
-	TicketName = ""
+	ADD OBJECT ID AS oh_StringType
+	ADD OBJECT TicketName AS oh_StringType
 	ADD OBJECT Currency AS oh_CurrencyType
-	Price = 0.0
+	ADD OBJECT Price AS oh_DoubleType
 
-	Members = '<member type="C" name="ID" />' + ;
-					'<member type="C" name="TicketName" />' + ;
+	Members = '<member type="oh_StringType" name="ID" />' + ;
+					'<member type="oh_StringType" name="TicketName" />' + ;
 					'<member type="oh_CurrencyType" name="Currency" />' + ;
-					'<member type="N" name="Price" />'
+					'<member type="oh_DoubleType" name="Price" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="id" type="property" display="ID" />' + ;
@@ -1342,14 +1342,14 @@ ENDDEFINE
 
 DEFINE CLASS oh_RoutingZoneType AS oh_Structure
 
-	Id = 0.0
-	ZoneName = "" && element = Name
+	ADD OBJECT Id AS oh_DoubleType
+	ADD OBJECT ZoneName AS oh_StringType && element = Name
 	ADD OBJECT Type AS oh_RoutingZoneTypeType
 	ADD OBJECT ShapeIndices AS Collection && OF oh_RouteShapeReferenceType
 	ADD OBJECT Restriction AS Collection && OF oh_VehicleRestrictionType
 
-	Members = '<member type="N" name="Id" />' + ;
-					'<member type="C" name="ZoneName" element="Name" />' + ;
+	Members = '<member type="oh_DoubleType" name="Id" />' + ;
+					'<member type="oh_StringType" name="ZoneName" element="Name" />' + ;
 					'<member type="oh_RoutingZoneTypeType" name="Type" />' + ;
 					'<member type="collection:oh_RouteShapeReferenceType" name="ShapeIndices" />' + ;
 					'<member type="collection:oh_VehicleRestrictionType" name="Restriction" />'
@@ -1366,11 +1366,11 @@ ENDDEFINE
 
 DEFINE CLASS oh_RouteShapeReferenceType AS oh_Structure
 
-	FirstPoint = 0
-	LastPoint = 0
+	ADD OBJECT FirstPoint AS oh_IntegerType
+	ADD OBJECT LastPoint AS oh_IntegerType
 
-	Members = '<member type="I" name="FirstPoint" />' + ;
-					'<member type="I" name="LastPoint" />'
+	Members = '<member type="oh_IntegerType" name="FirstPoint" />' + ;
+					'<member type="oh_IntegerType" name="LastPoint" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="firstpoint" type="property" display="FirstPoint" />' + ;
@@ -1396,10 +1396,10 @@ ENDDEFINE
 
 DEFINE CLASS oh_TimeDependentRestrictionType AS oh_Structure
 
-	ValidityPeriod = ""
+	ADD OBJECT ValidityPeriod AS oh_StringType
 	ADD OBJECT Type AS oh_TimeDependentRestrictionTypeType
 
-	Members = '<member type="C" name="ValidityPeriod" />' + ;
+	Members = '<member type="oh_StringType" name="ValidityPeriod" />' + ;
 					'<member type="oh_TimeDependentRestrictionTypeType" name="Type" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -1411,11 +1411,11 @@ ENDDEFINE
 
 DEFINE CLASS oh_GeneralizationType AS oh_Structure
 
-	Tolerance = 0.0
-	Index = 0
+	ADD OBJECT Tolerance AS oh_DoubleType
+	ADD OBJECT Index AS oh_IntegerType
 
-	Members = '<member type="N" name="Tolerance" />' + ;
-					'<member type="I" name="Index" />'
+	Members = '<member type="oh_DoubleType" name="Tolerance" />' + ;
+					'<member type="oh_IntegerType" name="Index" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="tolerance" type="property" display="Tolerance" />' + ;
@@ -1426,10 +1426,10 @@ ENDDEFINE
 
 DEFINE CLASS oh_SourceAttributionType AS oh_Structure
 
-	Attribution = ""
+	ADD OBJECT Attribution AS oh_StringType
 	ADD OBJECT SourceSupplier AS oh_SourceSupplierType
 
-	Members = '<member type="C" name="Attribution" />' + ;
+	Members = '<member type="oh_StringType" name="Attribution" />' + ;
 					'<member type="oh_SourceSupplierType" name="SourceSupplier" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -1441,12 +1441,12 @@ ENDDEFINE
 
 DEFINE CLASS oh_SourceSupplierType AS oh_Structure
 
-	Title = ""
-	Href = ""
+	ADD OBJECT Title AS oh_StringType
+	ADD OBJECT Href AS oh_StringType
 	ADD OBJECT Note AS oh_SourceSupplierNoteType
 
-	Members = '<member type="C" name="Title" />' + ;
-					'<member type="C" name="Href" />' + ;
+	Members = '<member type="oh_StringType" name="Title" />' + ;
+					'<member type="oh_StringType" name="Href" />' + ;
 					'<member type="oh_SourceSupplierNoteType" name="Note" />'
 
 	_MemberData = '<VFPData>' + ;
@@ -1460,14 +1460,14 @@ ENDDEFINE
 DEFINE CLASS oh_SourceSupplierNoteType AS oh_Structure
 
 	ADD OBJECT Type AS oh_SourceSupplierNoteTypeType
-	Text = ""
-	Href = ""
-	HrefText = ""
+	ADD OBJECT Text AS oh_StringType
+	ADD OBJECT Href AS oh_StringType
+	ADD OBJECT HrefText AS oh_StringType
 
 	Members = '<member type="oh_SupplierNoteTypeType" name="Type" />' + ;
-					'<member type="C" name="Text" />' + ;
-					'<member type="C" name="Href" />' + ;
-					'<member type="C" name="HrefText" />'
+					'<member type="oh_StringType" name="Text" />' + ;
+					'<member type="oh_StringType" name="Href" />' + ;
+					'<member type="oh_StringType" name="HrefText" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="type" type="property" display="Type" />' + ;

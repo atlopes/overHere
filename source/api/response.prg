@@ -103,7 +103,7 @@ DEFINE CLASS oh_Response AS Custom
 					m.ArrayItem = ""
 				ENDIF
 
-				This.StoreValue(m.SourceElement, m.Target, m.MemberName + m.ArrayItem, m.MemberType, m.TargetIsCollection, m.SourceKey)
+				This.StoreValue(m.SourceElement, m.Target, m.MemberName + m.ArrayItem, m.MemberType, m.TargetIsCollection, m.TargetIsArray, m.SourceKey)
 
 			ENDFOR
 
@@ -113,7 +113,7 @@ DEFINE CLASS oh_Response AS Custom
 
 	ENDFUNC
 
-	PROTECTED PROCEDURE StoreValue (Source AS MSXML2.IXMLDOMNode, Target AS oh_Structure, TargetName AS String, Datatype AS Character, InCollection AS Logical, KeySource AS String)
+	PROTECTED PROCEDURE StoreValue (Source AS MSXML2.IXMLDOMNode, Target AS oh_Structure, TargetName AS String, Datatype AS Character, InCollection AS Logical, InArray AS Logical, KeySource AS String)
 
 		LOCAL Value AS AnyType
 		LOCAL TargetObject AS Object
@@ -156,7 +156,7 @@ DEFINE CLASS oh_Response AS Custom
 
 		OTHERWISE
 
-			IF m.InCollection
+			IF m.InCollection OR m.InArray
 				m.TargetObject = CREATEOBJECT(m.Datatype)
 			ELSE
 				m.TargetObject = EVALUATE(m.TargetName)
