@@ -8,6 +8,8 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 LOCAL oh_Path AS String
 
 m.oh_Path = JUSTPATH(SYS(16))
@@ -87,6 +89,8 @@ DEFINE CLASS overHere AS Custom
 
 	FUNCTION Call (URL AS String, PostParameters AS String) AS Logical
 
+		SAFETHIS
+
 		This.ServerCall = m.URL
 		IF EMPTY(m.PostParameters)
 			This.ServerParameters = ""
@@ -116,6 +120,8 @@ DEFINE CLASS overHere AS Custom
 	ENDFUNC
 			
 	FUNCTION ComposeCredentials () AS String
+
+		SAFETHIS
 
 		RETURN This.ComposeArgument("app_id", This.App_ID) + "&" + This.ComposeArgument("app_code", This.App_Code)
 
@@ -209,6 +215,8 @@ DEFINE CLASS oh_Resource AS Custom
 
 	FUNCTION Init (API AS oh_API)
 
+		SAFETHIS
+
 		LOCAL ServerEnvironment AS String
 
 		IF VARTYPE(m.API) == "O"
@@ -242,12 +250,16 @@ DEFINE CLASS oh_Resource AS Custom
 
 	FUNCTION AddArgument (ArgKey AS String, ArgValue AS String, UTF8 AS Boolean)
 
+		SAFETHIS
+
 		This.QueryString = This.QueryString + This.QueryStringSeparator + ;
 			This.APIService.ComposeArgument(m.ArgKey, m.ArgValue, m.UTF8)
 
 	ENDFUNC
 
 	FUNCTION AddObjArgument (ArgKey AS String, ArgValue AS oh_Datatype, UTF8 AS Boolean) AS Logical
+
+		SAFETHIS
 
 		IF m.ArgValue.IsSet()
 			This.QueryString = This.QueryString + This.QueryStringSeparator + ;
@@ -261,6 +273,8 @@ DEFINE CLASS oh_Resource AS Custom
 
 	FUNCTION AddFlag (FlagKey AS String, FlagValue AS Logical)
 
+		SAFETHIS
+
 		IF m.FlagValue
 			This.QueryString = This.QueryString + This.QueryStringSeparator + m.FlagKey
 		ENDIF
@@ -269,11 +283,15 @@ DEFINE CLASS oh_Resource AS Custom
 
 	FUNCTION BuildURL () AS String
 
+		SAFETHIS
+
 		RETURN This.ResourceURL + This.ResourcePath + This.ResourceName + "?" + This.APIService.ComposeCredentials()
 
 	ENDFUNC
 
 	FUNCTION Call () AS Logical
+
+		SAFETHIS
 
 		IF This.PostQueryString
 			RETURN This.APIService.Call(This.BuildURL(), This.QueryString)

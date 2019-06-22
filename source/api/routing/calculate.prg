@@ -10,6 +10,8 @@ ENDIF
 
 DO (ADDBS(JUSTPATH(SYS(16))) + "route.prg")
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 
 	ResourceName = "calculateroute.xml"
@@ -123,6 +125,8 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 
 	FUNCTION Calculate (Request AS Logical) AS oh_CalculateRouteResponseType
 
+		SAFETHIS
+
 		IF !m.Request OR This.Request()
 			RETURN This.Route
 		ELSE
@@ -132,6 +136,8 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 	ENDFUNC
 
 	FUNCTION Request () AS Logical
+
+		SAFETHIS
 
 		This.PrepareRequest()
 
@@ -144,6 +150,8 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 	ENDFUNC
 
 	PROCEDURE PrepareRequest ()
+
+		SAFETHIS
 
 		LOCAL WP AS oh_WaypointParameterType
 		LOCAL ItemIndex AS Integer

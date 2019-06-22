@@ -8,6 +8,8 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_MapRouteMarkerGroupType AS oh_Datatype
 
 	ADD OBJECT RouteCoords AS oh_GeoCoordinatesListType
@@ -68,6 +70,8 @@ DEFINE CLASS oh_GraphObjectType AS oh_Datatype
 
 	FUNCTION Set (Lat AS Double, Long AS Double, Value AS Double, Fill AS StringOrNumber, BorderColor AS StringOrNumber) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 
 		IF This.IsValid(m.Lat, m.Long, m.Value, m.Fill, m.BorderColor)
@@ -92,6 +96,8 @@ DEFINE CLASS oh_GraphObjectType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -156,6 +162,8 @@ DEFINE CLASS oh_PointOfInterestType AS oh_Datatype
 
 	FUNCTION Set (Lat AS Double, Long AS Double, Fill AS String, Color AS String, Size AS Integer, Text AS String) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 
 		IF This.IsValid(m.Lat, m.Long, m.Fill, m.Color, m.Size, m.Text)
@@ -183,6 +191,8 @@ DEFINE CLASS oh_PointOfInterestType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -245,6 +255,8 @@ DEFINE CLASS oh_CustomTextXYType AS oh_CustomTextType
 
 	FUNCTION Set (X AS Integer, Y AS Integer, Text AS String, Color AS StringOrNumber, BorderColor AS StringOrNumber, Size AS Integer) AS Logical
 
+		SAFETHIS
+
 		IF oh_CustomTextType::Set(m.Text, m.Color, m.BorderColor, m.Size) AND This.X.Set(m.X) AND This.Y.Set(m.Y)
 			This._IsSet = .T.
 		ENDIF
@@ -262,6 +274,8 @@ DEFINE CLASS oh_CustomTextXYType AS oh_CustomTextType
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -292,6 +306,8 @@ DEFINE CLASS oh_CustomTextCoordType AS oh_CustomTextType
 
 	FUNCTION Set (Lat AS Double, Long AS Double, Text AS String, Color AS StringOrNumber, BorderColor AS StringOrNumber, Size AS Integer) AS Logical
 
+		SAFETHIS
+
 		IF oh_CustomTextType::Set(m.Text, m.Color, m.BorderColor, m.Size) AND This.Latitude.Set(m.Lat) AND This.Longitude.Set(m.Long)
 			This._IsSet = .T.
 		ENDIF
@@ -309,6 +325,8 @@ DEFINE CLASS oh_CustomTextCoordType AS oh_CustomTextType
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -347,6 +365,8 @@ DEFINE CLASS oh_CustomTextType AS oh_Datatype
 
 	FUNCTION Set (Text AS String, Color AS StringOrNumber, BorderColor AS StringOrNumber, Size AS Integer) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 		IF This.Text.Set(m.Text) AND ;
 				(VARTYPE(m.Color) == "L" OR This.Config.TextColor.Set(m.Color)) AND ;
@@ -368,6 +388,8 @@ DEFINE CLASS oh_CustomTextType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""

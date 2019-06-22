@@ -8,6 +8,8 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_ReverseGeocodeModeType AS oh_EnumerationType
 
 	_Enumeration = "retrieveAddresses,retrieveAreas,retrieveLandmarks,retrieveAll,trackPosition"
@@ -72,6 +74,8 @@ DEFINE CLASS oh_UTCTimeOffsetType AS oh_Datatype
 	RequireRegEx = .T.
 
 	FUNCTION Set (Hours AS Integer, Minutes AS Integer) AS Logical
+
+		SAFETHIS
 
 		IF This.IsValid(m.Hours, m.Minutes)
 			This.Value = TEXTMERGE("UTC<<IIF(m.Hours < 0,'-','+')>><<TRANSFORM(ABS(m.Hours),'@L 99')>>:<<TRANSFORM(m.Minutes,'@L 99')>>")
@@ -154,6 +158,8 @@ DEFINE CLASS oh_SpeedLimitType AS oh_IntegerType
 	ADD OBJECT Unit AS oh_SpeedLimitUnitType
 
 	FUNCTION Set (Limit AS Integer, Unit AS String) AS Logical
+
+		SAFETHIS
 
 		IF !(oh_IntegerType::Set(m.Limit) AND This.Unit.Set(m.Unit))
 			This._IsSet = .F.

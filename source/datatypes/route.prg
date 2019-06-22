@@ -8,6 +8,8 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_WaypointParameterType AS oh_Datatype
 
 	ADD OBJECT Type AS oh_WaypointTypeType
@@ -47,6 +49,8 @@ DEFINE CLASS oh_GeoWaypointParameterType AS oh_WaypointParameterType
 						Lat AS Double, Long AS Double, Alt AS Double, Radius AS Integer, ;
 						UserLabel AS String, Heading AS Double) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 
 		IF VARTYPE(m.Alt) == "N"
@@ -85,6 +89,8 @@ DEFINE CLASS oh_GeoWaypointParameterType AS oh_WaypointParameterType
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -151,6 +157,8 @@ DEFINE CLASS oh_StreetNavigationWaypointParameterType AS oh_WaypointParameterTyp
 						Lat AS Double, Long AS Double, Alt AS Double, StreetName AS String, ;
 						Heading AS Double, Radius AS Integer) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 
 		IF VARTYPE(m.Alt) == "N"
@@ -200,6 +208,8 @@ DEFINE CLASS oh_StreetNavigationWaypointParameterType AS oh_WaypointParameterTyp
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -268,6 +278,8 @@ DEFINE CLASS oh_LinkNavigationWaypointParameterType AS oh_WaypointParameterType
 						UserLabel AS String, ;
 						LinkPosition AS String, Spot AS Double) AS Logical
 
+		SAFETHIS
+
 		This.Reset()
 
 		This._IsSet = This.LinkPosition.Set(m.LinkPosition)
@@ -306,6 +318,8 @@ DEFINE CLASS oh_LinkNavigationWaypointParameterType AS oh_WaypointParameterType
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -386,11 +400,8 @@ ENDDEFINE
 
 DEFINE CLASS oh_RouteFeatureWeightType AS oh_IntegerType
 
-	FUNCTION IsValid (Value AS Integer)
-
-		RETURN oh_IntegerType::IsValid(m.Value) AND BETWEEN(m.Value, -3, 0)
-
-	ENDFUNC
+	Minimum = -3
+	Maximum = 0
 
 ENDDEFINE
 
@@ -403,6 +414,8 @@ DEFINE CLASS oh_RouteFeaturesListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Feature AS String, Weight AS Integer)
+
+		SAFETHIS
 
 		LOCAL RouteFeature AS oh_RouteFeatureType
 		LOCAL FeatureWeight AS oh_RouteFeatureWeightType
@@ -419,6 +432,8 @@ DEFINE CLASS oh_RouteFeaturesListType AS oh_Datatype
 			ENDIF
 		ENDIF
 
+		RETURN This._IsSet
+
 	ENDFUNC
 
 	FUNCTION Reset ()
@@ -429,6 +444,8 @@ DEFINE CLASS oh_RouteFeaturesListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -460,6 +477,8 @@ DEFINE CLASS oh_RoutingModeType AS oh_RoutingTypeType
 	ADD OBJECT Features AS oh_RouteFeaturesListType
 
 	FUNCTION Set (Component AS String, Value AS String, Weight AS Integer) AS Logical
+
+		SAFETHIS
 
 		IF !VARTYPE(m.Component) == "C" OR LEN(m.Component) < 4
 			This.Reset()
@@ -509,6 +528,8 @@ DEFINE CLASS oh_RoutingModeType AS oh_RoutingTypeType
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -551,6 +572,8 @@ DEFINE CLASS oh_VehicleType AS oh_EngineType
 
 	FUNCTION Set (Engine AS String, Consumption AS Double) AS Logical
 
+		SAFETHIS
+
 		IF !oh_EngineType::Set(m.Engine) OR !This.AverageConsumption.Set(m.Consumption)
 			This._IsSet = .F.
 		ENDIF
@@ -568,6 +591,8 @@ DEFINE CLASS oh_VehicleType AS oh_EngineType
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -587,7 +612,7 @@ ENDDEFINE
 
 DEFINE CLASS oh_SpeedConsumptionType AS oh_IntegerType
 
-	ADD OBJECT Consumption AS oh_DoubleType
+	ADD OBJECT Consumption AS oh_DoubleType WITH Minimum = 0
 
 	FUNCTION IsValid (Value AS Integer) AS Logical
 
@@ -595,13 +620,9 @@ DEFINE CLASS oh_SpeedConsumptionType AS oh_IntegerType
 
 	ENDFUNC
 
-	FUNCTION Consumption.IsValid (Value AS Double) AS Logical
-
-		RETURN oh_DoubleType::IsValid(m.Value) AND m.Value >= 0
-
-	ENDFUNC
-
 	FUNCTION SET(Value AS Integer, Consumption AS Double)
+
+		SAFETHIS
 
 		IF !oh_IntegerType::Set(m.Value) OR !This.Consumption.Set(m.Consumption)
 			This._IsSet = .F.
@@ -612,6 +633,8 @@ DEFINE CLASS oh_SpeedConsumptionType AS oh_IntegerType
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -639,6 +662,8 @@ DEFINE CLASS oh_ConsumptionModelType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Component AS String, Value AS Double, Speed AS Integer) AS Logical
+
+		SAFETHIS
 
 		IF !VARTYPE(m.Component) == "C" OR LEN(m.Component) < 4
 			This.Reset()
@@ -707,6 +732,8 @@ DEFINE CLASS oh_ConsumptionModelType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""

@@ -10,6 +10,8 @@ ENDIF
 
 DO (ADDBS(JUSTPATH(SYS(16))) + "maps")
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_MapImage AS oh_MapsResource
 
 	* map characteristics
@@ -57,6 +59,8 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 
 	FUNCTION GetImage (Request AS Logical) AS Blob
 
+		SAFETHIS
+
 		IF (m.Request AND This.Request()) OR !ISNULL(This.PictureObject)
 			RETURN This.PictureObject
 		ELSE
@@ -66,6 +70,8 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 	ENDFUNC
 
 	FUNCTION Request () AS Logical
+
+		SAFETHIS
 
 		This.PrepareRequest()
 		
@@ -80,6 +86,8 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 	ENDFUNC
 
 	PROCEDURE PrepareRequest ()
+
+		SAFETHIS
 
 		This.PrepareQueryString()
 
@@ -100,6 +108,8 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 	ENDPROC
 
 	PROTECTED FUNCTION _Pos (Coord AS oh_GeoCoordinateType, NumArg AS String, EncArg AS String) AS Logical
+
+		SAFETHIS
 
 		LOCAL Argument AS String
 

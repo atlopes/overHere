@@ -8,6 +8,8 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_LatitudeType AS oh_DoubleType
 
 	Precision = 7
@@ -44,11 +46,7 @@ ENDDEFINE
 
 DEFINE CLASS oh_DurationType AS oh_IntegerType
 
-	FUNCTION IsValid (Input AS Integer) AS Logical
-
-		RETURN oh_IntegerType::IsValid(m.Input) AND m.Input >= 0
-
-	ENDFUNC
+	Minimum = 0
 
 ENDDEFINE
 
@@ -133,6 +131,8 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION SetXML (Source AS MSXML2.IXMLDOMNode) AS Logical
+
+		SAFETHIS
 
 		LOCAL Lat AS MSXML2.IXMLDOMNode
 		LOCAL Long AS MSXML2.IXMLDOMNode
@@ -221,6 +221,8 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -273,6 +275,8 @@ DEFINE CLASS oh_GeoBoundingBoxType AS oh_Datatype
 
 	FUNCTION SetXML (Source AS MSXML2.IXMLDOMNode) AS Logical
 
+		SAFETHIS
+
 		IF !ISNULL(m.Source)
 
 			This._IsSet = This.TopLeft.SetXML(m.Source.selectNodes("TopLeft").item(0)) AND ;
@@ -303,6 +307,8 @@ DEFINE CLASS oh_GeoBoundingBoxType AS oh_Datatype
 
 	FUNCTION Parse (Input AS String) AS Logical
 
+		SAFETHIS
+
 		LOCAL ARRAY Parts(1)
 
 		IF ALINES(m.Parts, m.Input, 0, ";") = 2
@@ -317,6 +323,8 @@ DEFINE CLASS oh_GeoBoundingBoxType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -326,6 +334,8 @@ DEFINE CLASS oh_GeoBoundingBoxType AS oh_Datatype
 	ENDFUNC
 
 	HIDDEN FUNCTION GetCorner (Corner AS String) AS oh_GeoCoordinateType
+
+		SAFETHIS
 
 		LOCAL _Corner AS String
 		LOCAL LenCorner AS Integer
@@ -361,6 +371,8 @@ DEFINE CLASS oh_GeoBoundingBoxArrayType AS oh_Datatype
 
 	FUNCTION Set (Corner AS String, Lat AS Double, Long AS Double, Alt AS Double) AS Logical
 
+		SAFETHIS
+
 		LOCAL BoundingBox AS oh_GeoBoundingBoxType
 
 		m.BoundingBox = CREATEOBJECT("oh_GeoBoundingBoxType")
@@ -383,6 +395,8 @@ DEFINE CLASS oh_GeoBoundingBoxArrayType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Parse (Input AS String) AS Logical
+
+		SAFETHIS
 
 		LOCAL ARRAY Elements(1)
 		LOCAL BoundingBoxStr AS String
@@ -407,6 +421,8 @@ DEFINE CLASS oh_GeoBoundingBoxArrayType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -436,6 +452,8 @@ DEFINE CLASS oh_GeoCoordinatesListType AS oh_ValuesListType
 
 	FUNCTION Set (Lat AS Double, Long AS Double)
 
+		SAFETHIS
+
 		LOCAL Element AS oh_GeoCoordinateType
 
 		m.Element = CREATEOBJECT(This.ValuesClass)
@@ -452,6 +470,8 @@ DEFINE CLASS oh_GeoCoordinatesListType AS oh_ValuesListType
 	ENDFUNC
 
 	FUNCTION Parse (Input AS String) AS Logical
+
+		SAFETHIS
 
 		LOCAL ARRAY Parts(1)
 		LOCAL NumCoords AS Integer
@@ -490,6 +510,8 @@ DEFINE CLASS oh_GeoProximityType AS oh_Datatype
 
 	FUNCTION Set (Lat AS Double, Long AS Double, Alt AS Double, Radius AS Double) AS Logical
 		
+		SAFETHIS
+
 		IF This.Center.Set(m.Lat, m.Long)	&& Altitude not being used...
 			IF PCOUNT() = 4
 				This._IsSet = This.Radius.Set(m.Radius)
@@ -527,6 +549,8 @@ DEFINE CLASS oh_GeoProximityType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -552,6 +576,8 @@ DEFINE CLASS oh_GeoPositionType AS oh_Datatype
 
 	FUNCTION Set (Lat AS Double, Long AS Double, Alt AS Double, Heading AS Double) AS Logical
 		
+		SAFETHIS
+
 		IF This.Coordinate.Set(m.Lat, m.Long)	&& Altitude not being used...
 			IF PCOUNT() = 4
 				This._IsSet = This.Heading.Set(m.Heading)
@@ -588,6 +614,8 @@ DEFINE CLASS oh_GeoPositionType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		IF !This._IsSet
 			RETURN ""
@@ -642,6 +670,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 
 	FUNCTION PreInit ()
 
+		SAFETHIS
+
 		This.Value = CREATEOBJECT("Collection")
 		This.Element = CREATEOBJECT(This.ValuesClass)
 
@@ -650,6 +680,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Value) AS Logical
+
+		SAFETHIS
 
 		LOCAL Element
 
@@ -668,6 +700,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 
 	FUNCTION SetXML (Source AS MSXML2.IXMLDOMNode) AS Logical
 
+		SAFETHIS
+
 		IF !ISNULL(m.Source)
 
 			This._IsSet = This.Parse(CHRTRAN(m.Source.text, " ", ","))
@@ -683,6 +717,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Get (ElementIndex AS Integer)
+
+		SAFETHIS
 
 		IF !This._IsSet OR This.Value.Count = 0
 			RETURN .NULL.
@@ -711,6 +747,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Parse (Input AS String) AS Logical
+
+		SAFETHIS
 
 		LOCAL ARRAY Parts(1)
 		LOCAL Value AS Integer
@@ -743,6 +781,8 @@ DEFINE CLASS oh_ValuesListType AS oh_Datatype
 
 	FUNCTION ToString ()
 
+		SAFETHIS
+
 		LOCAL Result AS String
 		LOCAL Value AS String
 		LOCAL Sep AS Character
@@ -772,6 +812,8 @@ DEFINE CLASS oh_KeyValuePairsListType AS oh_Datatype
 
 	FUNCTION Set (KeyPart AS String, ValuePart AS String)
 
+		SAFETHIS
+
 		LOCAL KP AS oh_KeyValuePairType
 
 		m.KP = CREATEOBJECT("oh_KeyValuePairType")
@@ -788,6 +830,8 @@ DEFINE CLASS oh_KeyValuePairsListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Parse (Input AS String) AS Logical
+
+		SAFETHIS
 
 		LOCAL ARRAY Parts(1)
 		LOCAL Pair AS Integer
@@ -812,6 +856,8 @@ DEFINE CLASS oh_KeyValuePairsListType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString ()
+
+		SAFETHIS
 
 		LOCAL Result AS String
 		LOCAL Sep AS Character
@@ -843,6 +889,8 @@ DEFINE CLASS oh_KeyValuePairType AS oh_Datatype
 						'</VFPData>'
 
 	FUNCTION Set (KeyPart AS String, ValuePart AS String) AS Logical
+
+		SAFETHIS
 
 		IF This.IsValid(m.KeyPart, m.ValuePart)
 			This.KeyId = m.KeyPart
@@ -876,6 +924,8 @@ DEFINE CLASS oh_KeyValuePairType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		RETURN IIF(This._IsSet, This.KeyId + "," + This.Value, "")
 
 	ENDFUNC
@@ -891,6 +941,8 @@ DEFINE CLASS oh_ColorType AS oh_StringType
 	ENDFUNC
 
 	FUNCTION Set (Input AS StringOrNumber) AS Logical
+
+		SAFETHIS
 
 		LOCAL HexRGB AS String
 
@@ -947,6 +999,8 @@ DEFINE CLASS oh_EnumerationType AS oh_Datatype
 
 	FUNCTION PreInit () AS Logical
 
+		SAFETHIS
+
 		LOCAL Entry AS String
 
 		ALINES(This.Enumeration, This._Enumeration, 0, ",")
@@ -959,6 +1013,8 @@ DEFINE CLASS oh_EnumerationType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION IsValid (Input AS String) AS Logical
+
+		SAFETHIS
 
 		RETURN VARTYPE(m.Input) == "C" AND ASCAN(This.Enumeration, m.Input, -1, -1, -1, 6) != 0
 
@@ -981,6 +1037,8 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Input AS Datetime) AS Logical
+
+		SAFETHIS
 
 		IF This.IsValid(m.Input)
 			This.Value = m.Input
@@ -1009,6 +1067,8 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -1028,6 +1088,8 @@ DEFINE CLASS oh_DateType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Input AS Date) AS Logical
+
+		SAFETHIS
 
 		IF This.IsValid(m.Input)
 			This.Value = IIF(VARTYPE(m.Input) == "D", m.Input, TTOD(m.Input))
@@ -1056,6 +1118,8 @@ DEFINE CLASS oh_DateType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		IF !This._IsSet
 			RETURN ""
 		ENDIF
@@ -1083,6 +1147,8 @@ DEFINE CLASS oh_IntegerType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION Set (Input AS Integer) AS Logical
+
+		SAFETHIS
 
 		IF This.IsValid(m.Input)
 			This.Value = INT(m.Input)
@@ -1120,6 +1186,8 @@ DEFINE CLASS oh_IntegerType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		RETURN IIF(This._IsSet AND !ISNULL(This.Value), LTRIM(TRANSFORM(This.Value, "99999999999")), "")
 
 	ENDFUNC
@@ -1140,6 +1208,8 @@ DEFINE CLASS oh_DoubleType AS oh_Datatype
 						'</VFPData>'
 
 	FUNCTION IsValid (Input AS Double) AS Logical
+
+		SAFETHIS
 
 		RETURN VARTYPE(m.Input) == "N" AND m.Input >= NVL(This.Minimum, m.Input) AND m.Input <= NVL(This.Maximum, m.Input)
 
@@ -1162,6 +1232,8 @@ DEFINE CLASS oh_DoubleType AS oh_Datatype
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		LOCAL SetPoint AS String
 		LOCAL SetFixed AS String
@@ -1226,6 +1298,8 @@ DEFINE CLASS oh_BooleanType AS oh_Datatype
 
 	FUNCTION ToString () AS String
 
+		SAFETHIS
+
 		RETURN IIF(!This._IsSet OR ISNULL(This.Value), "", IIF(This.Value, "true", "false"))
 
 	ENDFUNC
@@ -1241,6 +1315,8 @@ DEFINE CLASS oh_StringType AS oh_Datatype
 						'</VFPData>'
 
 	FUNCTION IsValid (Input AS String) AS Logical
+
+		SAFETHIS
 
 		RETURN VARTYPE(m.Input) == "C" AND (!EMPTY(ALLTRIM(m.Input)) OR This.AllowEmpty)
 
@@ -1301,6 +1377,8 @@ DEFINE CLASS oh_Datatype AS oh_Base
 
 	FUNCTION Init (Value AS Anytype) AS Logical
 
+		SAFETHIS
+
 		IF This.PreInit()
 			IF This.RequireRegEx
 				This.RegEx = CREATEOBJECT("VBScript.RegExp")
@@ -1323,6 +1401,8 @@ DEFINE CLASS oh_Datatype AS oh_Base
 
 	FUNCTION Set (Value) AS Logical
 
+		SAFETHIS
+
 		IF This.IsValid(m.Value)
 			This.Value = m.Value
 			This._IsSet = .T.
@@ -1336,6 +1416,8 @@ DEFINE CLASS oh_Datatype AS oh_Base
 
 	FUNCTION Get ()
 
+		SAFETHIS
+
 		RETURN This.Value
 
 	ENDFUNC
@@ -1348,6 +1430,8 @@ DEFINE CLASS oh_Datatype AS oh_Base
 
 	FUNCTION IsSet () AS Logical
 
+		SAFETHIS
+
 		RETURN This._IsSet
 
 	ENDFUNC
@@ -1359,6 +1443,8 @@ DEFINE CLASS oh_Datatype AS oh_Base
 	ENDFUNC
 
 	FUNCTION ToString () AS String
+
+		SAFETHIS
 
 		RETURN IIF(This._IsSet, TRANSFORM(NVL(This.Value, "")), "")
 

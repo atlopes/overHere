@@ -10,6 +10,8 @@ ENDIF
 
 DO (ADDBS(JUSTPATH(SYS(16))) + "geocode.prg")
 
+#DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
+
 DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 
 	ResourceName = "geocode.xml"
@@ -82,6 +84,8 @@ DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 
 	FUNCTION GetLocation (Request AS Logical) AS oh_SearchResponseType
 
+		SAFETHIS
+
 		IF !m.Request OR This.Request()
 			RETURN This.Location
 		ELSE
@@ -91,6 +95,8 @@ DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 	ENDFUNC
 
 	FUNCTION Request () AS Logical
+
+		SAFETHIS
 
 		This.PrepareRequest()
 
@@ -103,6 +109,8 @@ DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 	ENDFUNC
 
 	PROCEDURE PrepareRequest ()
+
+		SAFETHIS
 
 		This.Location = .NULL.
 
