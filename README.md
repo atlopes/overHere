@@ -16,10 +16,11 @@ In the examples folder, a few forms illustrate the use of the SDK.
 - `Statistics.scx`, to display geolocalized visual data
 - `Geocoder.scx`, to search geo coordinate locations
 - `Itineraries.scx`, to calculate routes and to display their steps
+- `AutoComplete.scx`, to get a list of geocode suggestions.
 
 `Geocoder.scx` may provide information for `MapViewer.scx` and `Itineraries.scx` forms, so it may desirable to keep them open at the same time.
 
-In each one of these forms, the call to Here.com resources can be found in self-contained methods. A developer should read the code in `GetImage()`, `GetLocation()`, and `GetRoute()` methods to get a first understanding of the operation of overHere, and to take them as examples of how a VFP application can integrate Here.com resources.
+In each one of these forms, the call to Here.com resources can be found in self-contained methods. A developer should read the code in `GetImage()`, `GetLocation()`, `GetRoute()`, and `GetSuggestions()` methods to get a first understanding of the operation of overHere, and to take them as examples of how a VFP application can integrate Here.com resources.
 
 ## Quick demo
 
@@ -84,6 +85,10 @@ A route calculated from Lisbon to Paris,
 and a segment of the route, when it reaches the Portuguese-Spanish border. The overall distance of the journey is about 1735 km, while this segment has a length of 35 km, approximately.
 
 ![At the Portuguese-Spanish border.](docs/lisbon-paris-segment.png "At the Portuguese-Spanish border.")
+
+## Dependencies
+
+Some of the classes depend on `JsonToXML`, a simple Json to XML converter (see [VFP XML library set](https://github.com/atlopes/xml/) GitHub repository for details).
 
 ## Status
 

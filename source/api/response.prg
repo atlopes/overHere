@@ -8,6 +8,12 @@ IF !SYS(16) $ SET("Procedure")
 	SET PROCEDURE TO (SYS(16)) ADDITIVE
 ENDIF
 
+IF _VFP.StartMode = 0
+	DO LOCFILE("jsontoxml.prg")
+ELSE
+	DO jsontoxml.prg
+ENDIF
+
 DEFINE CLASS oh_Response AS Custom
 
 	_MemberData = '<VFPData>' + ;
@@ -220,3 +226,30 @@ DEFINE CLASS oh_Response AS Custom
 
 ENDDEFINE
 
+DEFINE CLASS oh_ResponseJSON AS oh_Response
+
+	Encoding = "utf-8"
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="toxml" type="method" display="ToXML" />' + ;
+						'<memberdata name="encoding" type="property" display="Encoding" />' + ;
+						'</VFPData>'
+
+	FUNCTION ToXML (JSON AS String, ResponseName AS String) AS MSXML2.DOMDocument60
+
+		LOCAL Converter AS JsonToXML
+		LOCAL Source AS String
+
+		DO CASE
+		CASE LOWER(This.Encoding) == "utf-8"
+			m.Source = STRCONV(STRCONV(m.JSON, 11), 2)
+		OTHERWISE
+			m.Source = m.JSON
+		ENDCASE
+
+		m.Converter = CREATEOBJECT("JSonToXML")
+		RETURN m.Converter.Convert(m.Source, m.ResponseName)
+
+	ENDFUNC
+
+ENDDEFINE

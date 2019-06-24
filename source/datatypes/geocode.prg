@@ -766,3 +766,80 @@ DEFINE CLASS oh_CategoryType AS oh_Structure
 						'</VFPData>'
 
 ENDDEFINE
+
+DEFINE CLASS oh_SuggestionResponseType AS oh_Structure
+
+	ADD OBJECT suggestions AS Collection
+
+	Members = '<member type="collection:oh_GeocodeSuggestionType" name="suggestions" />'
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="suggestions" type="property" display="Suggestions" />' + ;
+						'</VFPData>'
+ENDDEFINE
+
+DEFINE CLASS oh_GeocodeSuggestionType AS oh_Structure
+
+	ADD OBJECT label AS oh_StringType
+	ADD OBJECT language AS oh_LanguageCodeType
+	ADD OBJECT countryCode AS oh_CountryCodeType
+	ADD OBJECT locationId AS oh_StringType
+	ADD OBJECT address AS oh_SuggestedAddressType
+	ADD OBJECT distance AS oh_DistanceType
+	ADD OBJECT matchLevel AS oh_MatchLevelType
+
+	Members = '<member type="oh_StringType" name="label" />' + ;
+					'<member type="oh_LanguageCodeType" name="language" />' + ;
+					'<member type="oh_CountryCodeType" name="countryCode" />' + ;
+					'<member type="oh_StringType" name="locationId" />' + ;
+					'<member type="oh_SuggestedAddressType" name="address" />' + ;
+					'<member type="oh_DistanceType" name="distance" />' + ;
+					'<member type="oh_MatchLevelType" name="matchLevel" />'
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="label" type="property" display="Label" />' + ;
+						'<memberdata name="language" type="property" display="Language" />' + ;
+						'<memberdata name="countrycode" type="property" display="CountryCode" />' + ;
+						'<memberdata name="locationid" type="property" display="LocationId" />' + ;
+						'<memberdata name="address" type="property" display="Address" />' + ;
+						'<memberdata name="distance" type="property" display="Distance" />' + ;
+						'<memberdata name="matchlevel" type="property" display="MatchLevel" />' + ;
+						'</VFPData>'
+
+ENDDEFINE
+
+DEFINE CLASS oh_SuggestedAddressType AS oh_Structure
+
+	ADD OBJECT Country AS oh_StringType
+	ADD OBJECT State AS oh_StringType
+	ADD OBJECT County AS oh_StringType
+	ADD OBJECT City AS oh_StringType
+	ADD OBJECT District AS oh_StringType
+	ADD OBJECT Street AS oh_StringType
+	ADD OBJECT HouseNumber AS oh_StringType
+	ADD OBJECT Unit AS oh_StringType
+	ADD OBJECT PostalCode AS oh_StringType
+
+	Members = '<member name="country" type="oh_StringType" />' + ;
+					'<member name="state" type="oh_StringType" />' + ;
+					'<member name="county" type="oh_StringType" />' + ;
+					'<member name="city" type="oh_StringType" />' + ;
+					'<member name="district" type="oh_StringType" />' + ;
+					'<member name="street" type="oh_StringType" />' + ;
+					'<member name="houseNumber" type="oh_StringType" />' + ;
+					'<member name="postalCode" type="oh_StringType" />' + ;
+					'<member name="unit" type="oh_StringType" />'
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="country" type="property" display="Country" />' + ;
+						'<memberdata name="state" type="property" display="State" />' + ;
+						'<memberdata name="county" type="property" display="County" />' + ;
+						'<memberdata name="city" type="property" display="City" />' + ;
+						'<memberdata name="district" type="property" display="District" />' + ;
+						'<memberdata name="street" type="property" display="Street" />' + ;
+						'<memberdata name="housenumber" type="property" display="HouseNumber" />' + ;
+						'<memberdata name="postalcode" type="property" display="PostalCode" />' + ;
+						'<memberdata name="unit" type="property" display="Unit" />' + ;
+						'</VFPData>'
+
+ENDDEFINE
