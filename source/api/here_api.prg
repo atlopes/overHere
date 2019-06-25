@@ -59,6 +59,7 @@ DEFINE CLASS overHere AS Custom
 	FUNCTION Init ()
 
 		This.HTTP = CREATEOBJECT("MSXML2.ServerXMLHTTP.6.0")
+		This.HTTP.setTimeouts(0, 30000, 60000, 60000)
 
 	ENDFUNC
 
@@ -92,21 +93,29 @@ DEFINE CLASS overHere AS Custom
 		SAFETHIS
 
 		This.ServerCall = m.URL
-		IF EMPTY(m.PostParameters)
-			This.ServerParameters = ""
-			This.HTTP.open("Get", m.URL, .F.)
-			This.HTTP.send()
-		ELSE
-			This.ServerParameters = m.PostParameters
-			This.HTTP.open("Post", m.URL, .F.)
-			This.HTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
-			This.HTTP.send(m.PostParameters)
-		ENDIF
-		This.ServerStatus = This.HTTP.status
-		This.ServerStatusText = This.HTTP.statusText
-		This.ServerResponse = This.HTTP.responseBody
-		This.ServerXMLResponse = This.HTTP.responseXML
-		This.ServerHeaders = This.HTTP.getAllResponseHeaders()
+		TRY
+			IF EMPTY(m.PostParameters)
+				This.ServerParameters = ""
+				This.HTTP.open("Get", m.URL, .F.)
+				This.HTTP.send()
+			ELSE
+				This.ServerParameters = m.PostParameters
+				This.HTTP.open("Post", m.URL, .F.)
+				This.HTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+				This.HTTP.send(m.PostParameters)
+			ENDIF
+			This.ServerStatus = This.HTTP.status
+			This.ServerStatusText = This.HTTP.statusText
+			This.ServerResponse = This.HTTP.responseBody
+			This.ServerXMLResponse = This.HTTP.responseXML
+			This.ServerHeaders = This.HTTP.getAllResponseHeaders()
+		CATCH
+			This.ServerStatus = -1
+			This.ServerStatusText = "No access to server"
+			This.ServerResponse = 0h
+			This.ServerXMLResponse = .NULL.
+			This.ServerHeaders = ""
+		ENDTRY		
 
 		RETURN BETWEEN(This.ServerStatus, 200, 299)
 
