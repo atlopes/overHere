@@ -26,26 +26,11 @@ DEFINE CLASS overHere AS Custom
 	App_Code = ""
 	Production = .F.
 
-	ServerCall = ""
-	ServerParameters = ""
-	ServerStatus = 0
-	ServerStatusText = ""
-	ServerResponse = .NULL.
-	ServerXMLResponse = .NULL.
-	ServerHeaders = ""
-
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="HTTP" type="property" display="HTTP" />' + ;
 						'<memberdata name="app_id" type="property" display="App_ID" />' + ;
 						'<memberdata name="app_code" type="property" display="App_Code" />' + ;
 						'<memberdata name="production" type="property" display="Production" />' + ;
-						'<memberdata name="servercall" type="property" display="ServerCall" />' + ;
-						'<memberdata name="serverparameters" type="property" display="ServerParameters" />' + ;
-						'<memberdata name="serverstatus" type="property" display="ServerStatus" />' + ;
-						'<memberdata name="serverstatustext" type="property" display="ServerStatusText" />' + ;
-						'<memberdata name="serverresponse" type="property" display="ServerResponse" />' + ;
-						'<memberdata name="serverxmlresponse" type="property" display="ServerXMLResponse" />' + ;
-						'<memberdata name="serverheaders" type="property" display="ServerHeaders" />' + ;
 						'<memberdata name="setresource" type="method" display="SetResource" />' + ;
 						'<memberdata name="call" type="method" display="Call" />' + ;
 						'<memberdata name="setcredentials" type="method" display="SetCredentials" />' + ;
@@ -88,36 +73,36 @@ DEFINE CLASS overHere AS Custom
 
 	ENDFUNC
 
-	FUNCTION Call (URL AS String, PostParameters AS String) AS Logical
+	FUNCTION Call (Here AS oh_Resource, URL AS String, PostParameters AS String) AS Logical
 
 		SAFETHIS
 
-		This.ServerCall = m.URL
+		m.Here.ServerCall = m.URL
 		TRY
 			IF EMPTY(m.PostParameters)
-				This.ServerParameters = ""
+				m.Here.ServerParameters = ""
 				This.HTTP.open("Get", m.URL, .F.)
 				This.HTTP.send()
 			ELSE
-				This.ServerParameters = m.PostParameters
+				m.Here.ServerParameters = m.PostParameters
 				This.HTTP.open("Post", m.URL, .F.)
 				This.HTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
 				This.HTTP.send(m.PostParameters)
 			ENDIF
-			This.ServerStatus = This.HTTP.status
-			This.ServerStatusText = This.HTTP.statusText
-			This.ServerResponse = This.HTTP.responseBody
-			This.ServerXMLResponse = This.HTTP.responseXML
-			This.ServerHeaders = This.HTTP.getAllResponseHeaders()
+			m.Here.ServerStatus = This.HTTP.status
+			m.Here.ServerStatusText = This.HTTP.statusText
+			m.Here.ServerResponse = This.HTTP.responseBody
+			m.Here.ServerXMLResponse = This.HTTP.responseXML
+			m.Here.ServerHeaders = This.HTTP.getAllResponseHeaders()
 		CATCH
-			This.ServerStatus = -1
-			This.ServerStatusText = "No access to server"
-			This.ServerResponse = 0h
-			This.ServerXMLResponse = .NULL.
-			This.ServerHeaders = ""
+			m.Here.ServerStatus = -1
+			m.Here.ServerStatusText = "No access to server"
+			m.Here.ServerResponse = 0h
+			m.Here.ServerXMLResponse = .NULL.
+			m.Here.ServerHeaders = ""
 		ENDTRY		
 
-		RETURN BETWEEN(This.ServerStatus, 200, 299)
+		RETURN BETWEEN(m.Here.ServerStatus, 200, 299)
 
 	ENDFUNC
 
@@ -201,6 +186,14 @@ DEFINE CLASS oh_Resource AS Custom
 	QueryString = ""
 	QueryStringSeparator = ""
 
+	ServerCall = ""
+	ServerParameters = ""
+	ServerStatus = 0
+	ServerStatusText = ""
+	ServerResponse = .NULL.
+	ServerXMLResponse = .NULL.
+	ServerHeaders = ""
+
 	APIService = .NULL.
 
 	_MemberData = '<VFPData>' + ;
@@ -210,6 +203,13 @@ DEFINE CLASS oh_Resource AS Custom
 						'<memberdata name="querystring" type="property" display="QueryString" />' + ;
 						'<memberdata name="postquerystring" type="property" display="PostQueryString" />' + ;
 						'<memberdata name="querystringseparator" type="property" display="QueryStringSeparator" />' + ;
+						'<memberdata name="servercall" type="property" display="ServerCall" />' + ;
+						'<memberdata name="serverparameters" type="property" display="ServerParameters" />' + ;
+						'<memberdata name="serverstatus" type="property" display="ServerStatus" />' + ;
+						'<memberdata name="serverstatustext" type="property" display="ServerStatusText" />' + ;
+						'<memberdata name="serverresponse" type="property" display="ServerResponse" />' + ;
+						'<memberdata name="serverxmlresponse" type="property" display="ServerXMLResponse" />' + ;
+						'<memberdata name="serverheaders" type="property" display="ServerHeaders" />' + ;
 						'<memberdata name="apiservice" type="property" display="APIService" />' + ;
 						'<memberdata name="preparequerystring" type="method" display="PrepareQueryString" />' + ;
 						'<memberdata name="addargument" type="method" display="AddArgument" />' + ;
@@ -303,9 +303,9 @@ DEFINE CLASS oh_Resource AS Custom
 		SAFETHIS
 
 		IF This.PostQueryString
-			RETURN This.APIService.Call(This.BuildURL(), This.QueryString)
+			RETURN This.APIService.Call(This, This.BuildURL(), This.QueryString)
 		ELSE
-			RETURN This.APIService.Call(This.BuildURL() + "&" + This.QueryString)
+			RETURN This.APIService.Call(This, This.BuildURL() + "&" + This.QueryString)
 		ENDIF
 
 	ENDFUNC

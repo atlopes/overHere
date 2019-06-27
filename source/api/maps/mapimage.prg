@@ -76,7 +76,7 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 		This.PrepareRequest()
 		
 		IF This.Call()
-			This.PictureObject = This.APIService.ServerResponse
+			This.PictureObject = This.ServerResponse
 		ELSE
 			This.PictureObject = .NULL.
 		ENDIF

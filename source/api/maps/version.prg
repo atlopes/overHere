@@ -29,7 +29,7 @@ DEFINE CLASS oh_MapVersion AS oh_MapsResource
 		IF This.Components.Count = 0
 			This.PrepareQueryString()
 			IF This.Call()
-				FOR m.CompIndex = 1 TO ALINES(m.Components, "" + This.APIService.ServerResponse, 1, "<br>")
+				FOR m.CompIndex = 1 TO ALINES(m.Components, "" + This.ServerResponse, 1, "<br>")
 					This.Components.Add(SUBSTR(m.Components(m.CompIndex), AT(" ", m.Components(m.CompIndex)) + 1), ;
 												UPPER(LEFT(m.Components(m.CompIndex), AT(":", m.Components(m.CompIndex)) - 1)))
 				ENDFOR

@@ -142,7 +142,7 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 		This.PrepareRequest()
 
 		IF This.Call()
-			This.Route = This.Response.Read(This.APIService.ServerXMLResponse.selectNodes("//Response").item(0), CREATEOBJECT("oh_CalculateRouteResponseType"))
+			This.Route = This.Response.Read(This.ServerXMLResponse.selectNodes("//Response").item(0), CREATEOBJECT("oh_CalculateRouteResponseType"))
 		ENDIF
 
 		RETURN !ISNULL(This.Route)

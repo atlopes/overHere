@@ -70,7 +70,7 @@ DEFINE CLASS oh_GeocodeAutoComplete AS oh_GeocodeResource
 		This.PrepareRequest()
 
 		IF This.Call()
-			m.XML = This.Response.ToXML("" + This.APIService.ServerResponse, "AutoComplete")
+			m.XML = This.Response.ToXML("" + This.ServerResponse, "AutoComplete")
 			IF !ISNULL(m.XML)
 				This.Suggestion = This.Response.Read(m.XML.selectNodes("/AutoComplete").item(0), CREATEOBJECT("oh_SuggestionResponseType"))
 			ENDIF

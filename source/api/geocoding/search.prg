@@ -101,7 +101,7 @@ DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 		This.PrepareRequest()
 
 		IF This.Call()
-			This.Location = This.Response.Read(This.APIService.ServerXMLResponse.selectNodes("//Response").item(0), CREATEOBJECT("oh_SearchResponseType"))
+			This.Location = This.Response.Read(This.ServerXMLResponse.selectNodes("//Response").item(0), CREATEOBJECT("oh_SearchResponseType"))
 		ENDIF
 
 		RETURN !ISNULL(This.Location)
