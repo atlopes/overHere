@@ -26,13 +26,18 @@ DEFINE CLASS overHere AS Custom
 	App_Code = ""
 	Production = .F.
 
+	ADD OBJECT AsyncResources AS Collection
+
 	_MemberData = '<VFPData>' + ;
-						'<memberdata name="HTTP" type="property" display="HTTP" />' + ;
+						'<memberdata name="http" type="property" display="HTTP" />' + ;
 						'<memberdata name="app_id" type="property" display="App_ID" />' + ;
 						'<memberdata name="app_code" type="property" display="App_Code" />' + ;
 						'<memberdata name="production" type="property" display="Production" />' + ;
+						'<memberdata name="asyncresources" type="property" display="AsyncResources" />' + ;
 						'<memberdata name="setresource" type="method" display="SetResource" />' + ;
 						'<memberdata name="call" type="method" display="Call" />' + ;
+						'<memberdata name="registerasyncresource" type="method" display="RegisterAsyncResource" />' + ;
+						'<memberdata name="unregisterasyncresource" type="method" display="UnregisterAsyncResource" />' + ;
 						'<memberdata name="setcredentials" type="method" display="SetCredentials" />' + ;
 						'<memberdata name="composecredentials" type="method" display="ComposeCredentials" />' + ;
 						'<memberdata name="composeargument" type="method" display="ComposeArgument" />' + ;
@@ -46,6 +51,10 @@ DEFINE CLASS overHere AS Custom
 		This.HTTP = CREATEOBJECT("MSXML2.ServerXMLHTTP.6.0")
 		This.HTTP.setTimeouts(0, 30000, 60000, 60000)
 
+	ENDFUNC
+
+	FUNCTION Destroy
+		This.AsyncResources.Remove(-1)
 	ENDFUNC
 
 	FUNCTION SetResource (ResourceClass AS String, ResourceLibrary AS String) AS oh_Resource
@@ -77,23 +86,46 @@ DEFINE CLASS overHere AS Custom
 
 		SAFETHIS
 
+		LOCAL HTTP
+
+		IF m.Here.Async
+			This.RegisterAsyncResource(m.Here)
+			IF !ISNULL(m.Here.HTTPService)
+				TRY
+					m.Here.HTTPService.Abort()
+				CATCH
+				ENDTRY
+				m.Here.HTTPService = .NULL.
+			ENDIF
+			m.Here.HTTPService = CREATEOBJECT("WinHttp.WinHttpRequest.5.1")
+			m.Here.HTTPService.setTimeouts(0, 30000, 60000, 60000)
+			EVENTHANDLER(m.Here.HTTPService, m.Here)
+			m.HTTP = m.Here.HTTPService
+		ELSE
+			m.HTTP = This.HTTP
+		ENDIF
+
 		m.Here.ServerCall = m.URL
+		m.Here.ServerStatus = 0
+
 		TRY
 			IF EMPTY(m.PostParameters)
 				m.Here.ServerParameters = ""
-				This.HTTP.open("Get", m.URL, .F.)
-				This.HTTP.send()
+				m.HTTP.open("Get", m.URL, m.Here.Async)
+				m.HTTP.send()
 			ELSE
 				m.Here.ServerParameters = m.PostParameters
-				This.HTTP.open("Post", m.URL, .F.)
-				This.HTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
-				This.HTTP.send(m.PostParameters)
+				m.HTTP.open("Post", m.URL, m.Here.Async)
+				m.HTTP.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+				m.HTTP.send(m.PostParameters)
 			ENDIF
-			m.Here.ServerStatus = This.HTTP.status
-			m.Here.ServerStatusText = This.HTTP.statusText
-			m.Here.ServerResponse = This.HTTP.responseBody
-			m.Here.ServerXMLResponse = This.HTTP.responseXML
-			m.Here.ServerHeaders = This.HTTP.getAllResponseHeaders()
+			IF !m.Here.Async
+				m.Here.ServerStatus = m.HTTP.status
+				m.Here.ServerStatusText = m.HTTP.statusText
+				m.Here.ServerResponse = m.HTTP.responseBody
+				m.Here.ServerXMLResponse = m.HTTP.responseXML
+				m.Here.ServerHeaders = m.HTTP.getAllResponseHeaders()
+			ENDIF
 		CATCH
 			m.Here.ServerStatus = -1
 			m.Here.ServerStatusText = "No access to server"
@@ -102,7 +134,23 @@ DEFINE CLASS overHere AS Custom
 			m.Here.ServerHeaders = ""
 		ENDTRY		
 
-		RETURN BETWEEN(m.Here.ServerStatus, 200, 299)
+		RETURN m.Here.Async OR BETWEEN(m.Here.ServerStatus, 200, 299)
+
+	ENDFUNC
+
+	FUNCTION RegisterAsyncResource (Here AS oh_Resource)
+
+		IF This.AsyncResources.GetKey(m.Here.AsyncId) = 0
+			This.AsyncResources.Add(m.Here, m.Here.AsyncId)
+		ENDIF
+
+	ENDFUNC
+
+	FUNCTION UnregisterAsyncResource (Here AS oh_Resource)
+
+		IF This.AsyncResources.GetKey(m.Here.AsyncId) != 0
+			This.AsyncResources.Remove(m.Here.AsyncId)
+		ENDIF
 
 	ENDFUNC
 
@@ -177,11 +225,18 @@ ENDDEFINE
 	
 DEFINE CLASS oh_Resource AS Custom
 
+	IMPLEMENTS IWinHttpRequestEvents IN "WinHttp.WinHttpRequest.5.1"
+
 	ResourceURL = ""
 	ResourcePath = ""
 	ResourceName = ""
 
 	PostQueryString = .F.
+	Async = .F.
+	AsyncId = ""
+	AsyncFinished = .F.
+	AsyncEnabled = .F.
+	CallbackHandler = .NULL.
 
 	QueryString = ""
 	QueryStringSeparator = ""
@@ -195,13 +250,19 @@ DEFINE CLASS oh_Resource AS Custom
 	ServerHeaders = ""
 
 	APIService = .NULL.
+	HTTPService = .NULL.
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="resourceurl" type="property" display="ResourceURL" />' + ;
 						'<memberdata name="resourcepath" type="property" display="ResourcePath" />' + ;
 						'<memberdata name="resourcename" type="property" display="ResourceName" />' + ;
-						'<memberdata name="querystring" type="property" display="QueryString" />' + ;
 						'<memberdata name="postquerystring" type="property" display="PostQueryString" />' + ;
+						'<memberdata name="async" type="property" display="Async" />' + ;
+						'<memberdata name="asyncid" type="property" display="AsyncId" />' + ;
+						'<memberdata name="asyncfinished" type="property" display="AsyncFinished" />' + ;
+						'<memberdata name="asyncenabled" type="property" display="AsyncEnabled" />' + ;
+						'<memberdata name="callbackhandler" type="property" display="CallbackHandler" />' + ;
+						'<memberdata name="querystring" type="property" display="QueryString" />' + ;
 						'<memberdata name="querystringseparator" type="property" display="QueryStringSeparator" />' + ;
 						'<memberdata name="servercall" type="property" display="ServerCall" />' + ;
 						'<memberdata name="serverparameters" type="property" display="ServerParameters" />' + ;
@@ -211,7 +272,7 @@ DEFINE CLASS oh_Resource AS Custom
 						'<memberdata name="serverxmlresponse" type="property" display="ServerXMLResponse" />' + ;
 						'<memberdata name="serverheaders" type="property" display="ServerHeaders" />' + ;
 						'<memberdata name="apiservice" type="property" display="APIService" />' + ;
-						'<memberdata name="preparequerystring" type="method" display="PrepareQueryString" />' + ;
+						'<memberdata name="httpservice" type="property" display="HTTPService" />' + ;
 						'<memberdata name="addargument" type="method" display="AddArgument" />' + ;
 						'<memberdata name="addobjargument" type="method" display="AddObjArgument" />' + ;
 						'<memberdata name="addflag" type="method" display="AddFlag" />' + ;
@@ -219,8 +280,9 @@ DEFINE CLASS oh_Resource AS Custom
 						'<memberdata name="call" type="method" display="Call" />' + ;
 						'<memberdata name="preparerequest" type="method" display="PrepareRequest" />' + ;
 						'<memberdata name="request" type="method" display="Request" />' + ;
+						'<memberdata name="callback" type="method" display="Callback" />' + ;
+						'<memberdata name="registercallbackhandler" type="method" display="RegisterCallbackHandler" />' + ;
 						'</VFPData>'
-
 
 	FUNCTION Init (API AS oh_API)
 
@@ -240,7 +302,10 @@ DEFINE CLASS oh_Resource AS Custom
 
 	FUNCTION Destroy ()
 
+		This.APIService.UnregisterAsyncResource(This)
 		This.APIService = .NULL.
+		This.HTTPService = .NULL.
+		This.RegisterCallbackHandler(.NULL.)
 
 	ENDFUNC
 
@@ -316,6 +381,75 @@ DEFINE CLASS oh_Resource AS Custom
 	FUNCTION Request () AS Logical
 		RETURN .F.
 	ENDFUNC
+
+	FUNCTION Async_Enabled (NewValue AS Logical)
+	ENDFUNC
+
+	FUNCTION Async_Assign (NewValue AS Logical)
+
+		IF This.AsyncEnabled AND EMPTY(This.Async)
+			This.AsyncId = SYS(2015) + DTOS(DATE()) + TRANSFORM(SECONDS())
+			This.Async = m.NewValue
+		ENDIF
+
+	ENDFUNC
+
+	FUNCTION AsyncId_Assign (NewValue AS String)
+
+		IF EMPTY(This.AsyncId)
+			This.AsyncId = m.NewValue
+		ENDIF
+
+	ENDFUNC
+
+	FUNCTION Callback ()
+
+		IF This.AsyncFinished AND !ISNULL(This.CallbackHandler)
+			TRY
+				This.CallbackHandler.OverHereCallback(This)
+			CATCH
+			ENDTRY
+		ENDIF
+
+	ENDFUNC
+
+	FUNCTION RegisterCallbackHandler (Handler AS Object)
+
+		UNBINDEVENTS(This)
+		This.CallbackHandler = .NULL.
+		IF !ISNULL(m.Handler)
+			This.CallbackHandler = m.Handler
+			BINDEVENT(This, "AsyncFinished", This, "Callback", 1)
+		ENDIF
+
+	ENDFUNC
+
+	PROCEDURE IWinHttpRequestEvents_OnError (ErrorNumber, ErrorDescription)
+	ENDPROC
+
+	PROCEDURE IWinHttpRequestEvents_OnResponseDataAvailable (Data)
+	ENDPROC
+
+	PROCEDURE IWinHttpRequestEvents_OnResponseFinished
+
+		LOCAL XML AS MSXML2.DOMDocument60
+
+		This.ServerStatus = This.HTTPService.status
+		This.ServerStatusText = This.HTTPService.statusText
+		This.ServerResponse = This.HTTPService.responseBody
+		This.ServerHeaders = This.HTTPService.getAllResponseHeaders()
+
+		m.XML = CREATEOBJECT("MSXML2.DOMDocument.6.0")
+		m.XML.Async = .F.
+		m.XML.LoadXML("" + This.ServerResponse)
+		This.ServerXMLResponse = m.XML
+
+		This.AsyncFinished = .T.
+
+	ENDPROC
+
+	PROCEDURE IWinHttpRequestEvents_OnResponseStart (Status, ContentType)
+	ENDPROC
 
 ENDDEFINE
 

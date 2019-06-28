@@ -17,6 +17,8 @@ DEFINE CLASS oh_GeocodeAutoComplete AS oh_GeocodeResource
 	ResourceURL = "https://autocomplete.geocoder{cit}.api.here.com"
 	ResourceName = "suggest.json"
 
+	AsyncEnabled = .T.
+
 	* request and response adjustment
 	ADD OBJECT Language AS oh_StringType
 	ADD OBJECT MaxResults AS oh_IntegerType WITH Minimum = 1, Maximum = 20
@@ -61,7 +63,7 @@ DEFINE CLASS oh_GeocodeAutoComplete AS oh_GeocodeResource
 
 	ENDFUNC
 
-	FUNCTION Request () AS Logical
+	FUNCTION Request (NoCall AS Logical) AS Logical
 
 		SAFETHIS
 
@@ -69,10 +71,12 @@ DEFINE CLASS oh_GeocodeAutoComplete AS oh_GeocodeResource
 
 		This.PrepareRequest()
 
-		IF This.Call()
-			m.XML = This.Response.ToXML("" + This.ServerResponse, "AutoComplete")
-			IF !ISNULL(m.XML)
-				This.Suggestion = This.Response.Read(m.XML.selectNodes("/AutoComplete").item(0), CREATEOBJECT("oh_SuggestionResponseType"))
+		IF m.NoCall OR This.Call()
+			IF !This.Async OR m.NoCall
+				m.XML = This.Response.ToXML("" + This.ServerResponse, "AutoComplete")
+				IF !ISNULL(m.XML)
+					This.Suggestion = This.Response.Read(m.XML.selectNodes("/AutoComplete").item(0), CREATEOBJECT("oh_SuggestionResponseType"))
+				ENDIF
 			ENDIF
 		ENDIF
 
