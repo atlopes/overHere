@@ -184,7 +184,7 @@ ENDDEFINE
 DEFINE CLASS oh_SearchResponseType AS oh_Structure
 
 	ADD OBJECT MetaInfo AS oh_SearchResponseMetaInfoType
-	ADD OBJECT Views AS Collection
+	ADD OBJECT Views AS Collection && OF oh_SearchResponseViewType
 
 	Members = '<member type="oh_SearchResponseMetaInfoType" name="MetaInfo" />' + ;
 					'<member type="collection:oh_SearchResponseViewType" name="Views" element="View" />'
@@ -201,7 +201,7 @@ DEFINE CLASS oh_SearchResponseViewType AS oh_Structure
 	ADD OBJECT ViewId AS oh_StringType
 	ADD OBJECT PerformedSearch AS oh_StringType
 
-	ADD OBJECT Results AS Collection
+	ADD OBJECT Results AS Collection && OF oh_SearchResultType
 
 	Members = '<member type="oh_StringType" name="ViewId" />' + ;
 					'<member type="oh_StringType" name="PerformedSearch" />' + ;
@@ -222,7 +222,7 @@ DEFINE CLASS oh_SearchResponseMetaInfoType AS oh_Structure
 	ADD OBJECT NextPage AS oh_IntegerType
 	ADD OBJECT PreviousPage AS oh_IntegerType
 
-	ADD OBJECT AdditionalData AS Collection
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 
 	Members = '<member type="oh_StringType" name="RequestId" />' + ;
 					'<member type="oh_DatetimeType" name="Timestamp" />' + ;
@@ -246,13 +246,13 @@ DEFINE CLASS oh_SearchResultType AS oh_Structure
 	ADD OBJECT Distance AS oh_DistanceType
 	ADD OBJECT Direction AS oh_HeadingType
 	ADD OBJECT MatchLevel AS oh_MatchLevelType
-	ADD OBJECT MatchQuality AS Collection
+	ADD OBJECT MatchQuality AS Collection && OF oh_MatchQualityType
 	ADD OBJECT MatchType AS oh_MatchTypeType
 	ADD OBJECT Location AS oh_LocationType
 	ADD OBJECT Place AS oh_PlaceType
 	ADD OBJECT ParsedRequest AS oh_ParsedRequestType
 
-	ADD OBJECT AdditionalData AS Collection
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 
 	Members = '<member type="oh_DoubleType" name="Relevance" />' + ;
 						'<member type="oh_DistanceType" name="Distance" />' + ;
@@ -329,7 +329,7 @@ DEFINE CLASS oh_BaseLocationType AS oh_Structure
 	ADD OBJECT LinkInfo AS oh_LinkInfoType
 	ADD OBJECT AdminInfo AS oh_AdminInfoType
 
-	ADD OBJECT AdditionalData AS Collection
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 
 	Members = '<member type="oh_StringType" name="LocationId" />' + ;
 					'<member type="oh_LocationTypeType" name="LocationType" />' + ;
@@ -374,7 +374,7 @@ DEFINE CLASS oh_MatchQualityType AS oh_Structure
 	ADD OBJECT City AS oh_DoubleType
 	ADD OBJECT District AS oh_DoubleType
 	ADD OBJECT SubDistrict AS oh_DoubleType
-	DIMENSION Street(1)
+	DIMENSION Street(1) && OF oh_DoubleType
 	ADD OBJECT HouseNumber AS oh_DoubleType
 	ADD OBJECT PostalCode AS oh_DoubleType
 	ADD OBJECT Building AS oh_DoubleType
@@ -411,7 +411,7 @@ DEFINE CLASS oh_ParsedRequestType AS oh_BaseAddressType
 	ADD OBJECT Label AS oh_StringType
 	ADD OBJECT AddressLine AS oh_StringType
 
-	ADD OBJECT AdditionalData AS Collection
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 
 	AdditionalMembers = '<member type="oh_StringType" name="LandmarkName" element="Name" />' + ;
 								'<member type="oh_StringType" name="Label" />' + ;
@@ -433,7 +433,7 @@ DEFINE CLASS oh_AddressType AS oh_BaseAddressType
 	ADD OBJECT DistanceMarker AS oh_DistanceMarkerType
 	ADD OBJECT AddressLine AS oh_StringType
 
-	ADD OBJECT AdditionalData AS Collection
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 
 	AdditionalMembers = '<member type="oh_StringType" name="Label" />' + ;
 								'<member type="oh_DistanceMarkerType" name="DistanceMarker" />' + ;
@@ -573,8 +573,8 @@ DEFINE CLASS oh_LinkInfoType AS oh_Structure
 	ADD OBJECT SpeedCategory AS oh_SpeedCategoryType
 	ADD OBJECT SpeedLimit AS oh_SpeedLimitType
 	ADD OBJECT Traffic AS oh_StringType
-	ADD OBJECT LinkFlags AS Collection
-	ADD OBJECT AcessFlags AS Collection
+	ADD OBJECT LinkFlags AS Collection && LIST OF oh_LinkFlagType
+	ADD OBJECT AcessFlags AS Collection && LIST OF oh_LinkAccessFlagType
 
 	Members = '<member name="FunctionalClass" type="oh_FunctionalClassType" />' + ;
 					'<member name="TravelDirection" type="oh_CardinalDirectionType" />' + ;
@@ -685,21 +685,21 @@ ENDDEFINE
 
 DEFINE CLASS oh_AddressNamesType AS oh_Structure
 
-	ADD OBJECT Country AS Collection
-	ADD OBJECT State AS Collection
-	ADD OBJECT County AS Collection
-	ADD OBJECT City AS Collection
-	ADD OBJECT District AS Collection
-	ADD OBJECT SubDistrict AS Collection
-	ADD OBJECT Street AS Collection
+	ADD OBJECT Country AS Collection && OF oh_StringType
+	ADD OBJECT State AS Collection && OF oh_StringType
+	ADD OBJECT County AS Collection && OF oh_StringType
+	ADD OBJECT City AS Collection && OF oh_StringType
+	ADD OBJECT District AS Collection && OF oh_StringType
+	ADD OBJECT SubDistrict AS Collection && OF oh_StringType
+	ADD OBJECT Street AS Collection && OF oh_StringType
 
-	Members = '<member name="Country" type="collection:C" />' + ;
-					'<member name="State" type="collection:C" />' + ;
-					'<member name="County" type="collection:C" />' + ;
-					'<member name="City" type="collection:C" />' + ;
-					'<member name="District" type="collection:C" />' + ;
-					'<member name="SubDistrict" type="collection:C" />' + ;
-					'<member name="Street" type="collection:C" />'
+	Members = '<member name="Country" type="collection:oh_StringType" />' + ;
+					'<member name="State" type="collection:oh_StringType" />' + ;
+					'<member name="County" type="collection:oh_StringType" />' + ;
+					'<member name="City" type="collection:oh_StringType" />' + ;
+					'<member name="District" type="collection:oh_StringType" />' + ;
+					'<member name="SubDistrict" type="collection:oh_StringType" />' + ;
+					'<member name="Street" type="collection:oh_StringType" />'
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="country" type="property" display="Country" />' + ;
@@ -769,7 +769,7 @@ ENDDEFINE
 
 DEFINE CLASS oh_SuggestionResponseType AS oh_Structure
 
-	ADD OBJECT suggestions AS Collection
+	ADD OBJECT suggestions AS Collection && OF oh_GeocodeSuggestionType
 
 	Members = '<member type="collection:oh_GeocodeSuggestionType" name="suggestions" />'
 

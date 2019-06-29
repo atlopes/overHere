@@ -1300,13 +1300,13 @@ DEFINE CLASS oh_RouteNoteType AS oh_Structure
 	ADD OBJECT Type AS oh_RouteNoteTypeType
 	ADD OBJECT Code AS oh_RouteNoteCodeType
 	ADD OBJECT Text AS oh_StringType
-	ADD OBJECT AdditionalData AS Collection && OF C
+	ADD OBJECT AdditionalData AS Collection && KEY OF oh_StringType
 	ADD OBJECT CountryChangeDetails AS oh_CountryChangeDetailsType
 
 	Members = '<member type="oh_RouteNoteTypeType" name="Type" />' + ;
 					'<member type="oh_RouteNoteCodeType" name="Code" />' + ;
 					'<member type="oh_StringType" name="Text" />' + ;
-					'<member type="collection:C" name="AdditionalData" />' + ;
+					'<member type="keys:oh_StringType" name="AdditionalData" key="@key" />' + ;
 					'<member type="oh_CountryChangeDetailsType" name="CountryChangeDetails" />'
 
 	_MemberData = '<VFPData>' + ;

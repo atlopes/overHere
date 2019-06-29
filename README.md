@@ -6,6 +6,22 @@ Invoking the services and fetching their responses is done through a set of clas
 
 Developers using overHere must refer to the Here.com API documentation for implementation details. The overHere documentation will focus on how to set the calls and on how results are structured.
 
+## SDK organization
+
+The SDK source is divided into datatype and resource (API) classes.
+
+Datatype classes define the objects used to access the Here location platform, such as geo coordinate boundaries of a region in a map, and the structured response that the platform returns, such as the steps of a route between two points.
+
+These datatype classes are used by the resource classes to parameterize the calls to the platform services and to interpret and communicate the result to the application.
+
+The resource classes are generally composed of OH datatype objects that may be set by the application and of Get* methods that fetch the information from the platform (for instance, `GetLocation()` or `GetImage()`) and store it in a response object.
+
+Applications don’t instantiate the resources classes directly. Instead, they use `overHere`, a manager class that organizes the access to the platform and the instantiation of resource classes through a SetResource() method.
+
+Further documentation:
+
+- [Datatypes](docs/datatypes.md "Datatypes")
+
 ## Getting started
 
 Access to Here.com resources requires registration and, at least, the setting up of a project. See the [Here.com](https://www.here.com "Here.com") website for details.
@@ -17,6 +33,7 @@ In the examples folder, a few forms illustrate the use of the SDK.
 - `Geocoder.scx`, to search geo coordinate locations
 - `Itineraries.scx`, to calculate routes and to display their steps
 - `AutoComplete.scx`, to get a list of geocode suggestions.
+- `AutoComplete-Async.scx`, to get a list of geocode suggestions in asynchronous mode.
 
 `Geocoder.scx` may provide information for `MapViewer.scx` and `Itineraries.scx` forms, so it may desirable to keep them open at the same time.
 
@@ -33,7 +50,7 @@ DO LOCFILE("here_api.prg")
 DO mapview.prg
 ```
 
-**Instantiate an overHere API manager and set your credentials:**
+**Instantiate an overHere API manager and set Here.com credentials:**
 
 ```foxpro
 m.oh = CREATEOBJECT("overHere")
