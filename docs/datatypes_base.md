@@ -1,9 +1,9 @@
-# overHere docs:  Maps datatypes
+# overHere docs:  Base datatypes
 
 Go to
 
 - [Datatypes overview](datatypes.md "Datatypes overview")
-- [Maps datatypes](#datatypes "Maps datatypes")
+- [Base datatypes](#datatypes "Base datatypes")
 - [Response objects](#response "Response objects")
 
 <a name="datatypes"/>

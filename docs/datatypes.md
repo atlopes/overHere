@@ -5,7 +5,7 @@ Go to
 - [Base datatypes](datatypes_base.md "Base datatypes")
 - [Maps datatypes](datatypes_maps.md "Maps datatypes")
 - [Geocode datatypes](datatypes_geocode.md "Geocode datatypes")
-- [Route datatypes](datatypes_base.md "Route datatypes")
+- [Route datatypes](datatypes_route.md "Route datatypes")
 
 ## overHere Datatypes
 
@@ -21,7 +21,7 @@ For more complex types that don’t have a direct mapping to VFP scalar datatype
 ```foxpro
 m.someCoordObject.Set(52.475, 0.0001)
 ```
-For this kind of types, the Parse() method may also a comfortable option to assign the value, especially if the platform returned the value to set in a previous operation.
+For this kind of types, the Parse() method may also be a comfortable option to assign the value, especially if the platform returned the value to set in a previous operation.
 ```foxpro
 m.someGeoCoordObject.Parse("52.475,0.0001")
 ```
