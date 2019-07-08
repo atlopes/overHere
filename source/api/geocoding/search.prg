@@ -23,7 +23,7 @@ DEFINE CLASS oh_GeocodeSearch AS oh_GeocodeResource
 	ADD OBJECT ResponseAttributes AS oh_ValuesListType
 	ADD OBJECT Language AS oh_StringType
 	ADD OBJECT PoliticalView AS oh_StringType
-	ADD OBJECT StrictLanguageMode as oh_BooleanType
+	ADD OBJECT StrictLanguageMode AS oh_BooleanType
 
 	* filters
 	ADD OBJECT BoundingBox AS oh_GeoBoundingBoxType

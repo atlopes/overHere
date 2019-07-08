@@ -19,7 +19,7 @@ DEFINE CLASS oh_RouteMap AS oh_MapImagePOI
 	ADD OBJECT MapCenter AS oh_GeoCoordinateType
 
 	* route
-	ADD OBJECT Routes AS Collection
+	ADD OBJECT Routes AS Collection && OF oh_MapRouteMarkerGroupType
 	ADD OBJECT RouteMarkerConfig AS oh_MapRouteMarkerGroupConfigType
 
 	* flags

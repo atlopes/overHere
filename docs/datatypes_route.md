@@ -21,15 +21,15 @@ Go to
 | <a name="oh_IncidentTypeType"/>oh_IncidentTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_InstructionFormatType"/>oh_InstructionFormatType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_LicensePlatePatternType"/>oh_LicensePlatePatternType | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | - |
-| <a name="oh_LinkNavigationWaypointParamet"/>oh_LinkNavigationWaypointParamet | [oh_WaypointParameterType](#oh_WaypointParameterType "oh_WaypointParameterType") | - | - |
+| <a name="oh_LinkNavigationWaypointParameterType"/>oh_LinkNavigationWaypointParameterType | [oh_WaypointParameterType](#oh_WaypointParameterType "oh_WaypointParameterType") | Type AS String, StopOverDuration AS Integer, LatDisplay AS Double, LongDispla AS Double, AltDisplay AS Double, UserLabel AS String, LinkPosition AS String, Spot AS Double | - |
 | <a name="oh_ManeuverAttributeType"/>oh_ManeuverAttributeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_PrivateTransportActionType"/>oh_PrivateTransportActionType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_PublicTransportActionType"/>oh_PublicTransportActionType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_PublicTransportFlagType"/>oh_PublicTransportFlagType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
-| <a name="oh_PublicTransportLineAttributeT"/>oh_PublicTransportLineAttributeT | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
+| <a name="oh_PublicTransportLineAttributeType"/>oh_PublicTransportLineAttributeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_PublicTransportLinkFlagType"/>oh_PublicTransportLinkFlagType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_PublicTransportTypeType"/>oh_PublicTransportTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
-| <a name="oh_RecurringTimeIntervalsCombina"/>oh_RecurringTimeIntervalsCombina | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | - |
+| <a name="oh_RecurringTimeIntervalsCombinationType"/>oh_RecurringTimeIntervalsCombinationType | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | - |
 | <a name="oh_ResourceTypeType"/>oh_ResourceTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RouteAttributeType"/>oh_RouteAttributeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RouteFeatureType"/>oh_RouteFeatureType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
@@ -40,7 +40,7 @@ Go to
 | <a name="oh_RouteLinkFlagType"/>oh_RouteLinkFlagType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RouteNoteCodeType"/>oh_RouteNoteCodeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RouteNoteTypeType"/>oh_RouteNoteTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
-| <a name="oh_RouteRepresentationOptionsTyp"/>oh_RouteRepresentationOptionsTyp | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
+| <a name="oh_RouteRepresentationOptionsType"/>oh_RouteRepresentationOptionsType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RoutingModeType"/>oh_RoutingModeType | [oh_RoutingTypeType](#oh_RoutingTypeType "oh_RoutingTypeType") | Component AS String, Value AS String, Weight AS Integer | - |
 | <a name="oh_RoutingTypeType"/>oh_RoutingTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RoutingZoneTypeType"/>oh_RoutingZoneTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
@@ -48,8 +48,8 @@ Go to
 | <a name="oh_SourceSupplierNoteTypeType"/>oh_SourceSupplierNoteTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_SpeedConsumptionType"/>oh_SpeedConsumptionType | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | - |
 | <a name="oh_SpeedProfileType"/>oh_SpeedProfileType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
-| <a name="oh_StreetNavigationWaypointParam"/>oh_StreetNavigationWaypointParam | [oh_WaypointParameterType](#oh_WaypointParameterType "oh_WaypointParameterType") | - | - |
-| <a name="oh_TimeDependentRestrictionTypeT"/>oh_TimeDependentRestrictionTypeT | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
+| <a name="oh_StreetNavigationWaypointParameterType"/>oh_StreetNavigationWaypointParameterType | [oh_WaypointParameterType](#oh_WaypointParameterType "oh_WaypointParameterType") | Type AS String, StopOverDuration AS Integer, LatDisplay AS Double, LongDispla AS Double, AltDisplay AS Double, UserLabel AS String, Lat AS Double, Long AS Double, Alt AS Double, StreetName AS String, Heading AS Double, Radius AS Integer | - |
+| <a name="oh_TimeDependentRestrictionTypeType"/>oh_TimeDependentRestrictionTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_TrafficModeType"/>oh_TrafficModeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_TransportModeType"/>oh_TransportModeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_TruckRestrictionPenaltyType"/>oh_TruckRestrictionPenaltyType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
@@ -71,7 +71,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_CalculateRouteResponseType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_CalculateRouteResponseType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | MetaInfo | [oh_RouteResponseMetaInfoType](#oh_RouteResponseMetaInfoType "oh_RouteResponseMetaInfoType")  | - |
 |  |  | Routes | [oh_RouteType](#oh_RouteType "oh_RouteType")  | Collection |
 |  |  | Language | [oh_LanguageCodeType](datatypes_base.md#oh_LanguageCodeType "oh_LanguageCodeType")  | - |
@@ -82,7 +82,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_CountryChangeDetailsType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_CountryChangeDetailsType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ToCountry | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 
 
@@ -90,7 +90,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_GeneralizationType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_GeneralizationType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Tolerance | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | Index | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
 
@@ -99,7 +99,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_IncidentType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_IncidentType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ValidityPeriod | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Text | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Type | [oh_IncidentTypeType](#oh_IncidentTypeType "oh_IncidentTypeType")  | - |
@@ -112,7 +112,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_ManeuverGroupType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_ManeuverGroupType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | firstmaneuver | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | lastmaneuver | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | mode | [oh_RoutingModeType](#oh_RoutingModeType "oh_RoutingModeType")  | - |
@@ -126,7 +126,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_ManeuverType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_ManeuverType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | id | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Position | [oh_GeoCoordinateType](datatypes_base.md#oh_GeoCoordinateType "oh_GeoCoordinateType")  | - |
 |  |  | Instruction | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -147,7 +147,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_PublicTransportTicketType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_PublicTransportTicketType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ID | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | TicketName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Currency | [oh_CurrencyType](datatypes_base.md#oh_CurrencyType "oh_CurrencyType")  | - |
@@ -158,7 +158,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_PublicTransportTicketsType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_PublicTransportTicketsType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ID | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | PublicTransportTickets | [oh_PublicTransportTicketType](#oh_PublicTransportTicketType "oh_PublicTransportTicketType")  | Collection |
 
@@ -167,7 +167,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteLegType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteLegType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Start | [oh_WaypointType](#oh_WaypointType "oh_WaypointType")  | - |
 |  |  | End | [oh_WaypointType](#oh_WaypointType "oh_WaypointType")  | - |
 |  |  | Length | [oh_DistanceType](datatypes_base.md#oh_DistanceType "oh_DistanceType")  | - |
@@ -188,7 +188,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteNoteType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteNoteType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Type | [oh_RouteNoteTypeType](#oh_RouteNoteTypeType "oh_RouteNoteTypeType")  | - |
 |  |  | Code | [oh_RouteNoteCodeType](#oh_RouteNoteCodeType "oh_RouteNoteCodeType")  | - |
 |  |  | Text | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -200,7 +200,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteResponseMetaInfoType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteResponseMetaInfoType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | RequestId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Timestamp | [oh_DatetimeType](datatypes_base.md#oh_DatetimeType "oh_DatetimeType")  | - |
 |  |  | MapVersion | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -213,7 +213,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteShapeReferenceType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteShapeReferenceType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | FirstPoint | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
 |  |  | LastPoint | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
 
@@ -222,7 +222,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteSummaryType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteSummaryType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Distance | [oh_DistanceType](datatypes_base.md#oh_DistanceType "oh_DistanceType")  | - |
 |  |  | TrafficTime | [oh_DurationType](datatypes_base.md#oh_DurationType "oh_DurationType")  | - |
 |  |  | BaseTime | [oh_DurationType](datatypes_base.md#oh_DurationType "oh_DurationType")  | - |
@@ -236,7 +236,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RouteType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RouteType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | RouteId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Waypoints | [oh_WaypointType](#oh_WaypointType "oh_WaypointType")  | Collection |
 |  |  | Mode | [oh_RoutingModeType](#oh_RoutingModeType "oh_RoutingModeType")  | - |
@@ -260,7 +260,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RoutingZoneType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RoutingZoneType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Id | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | ZoneName |   | Collection |
 |  |  | Type | [oh_RoutingZoneTypeType](#oh_RoutingZoneTypeType "oh_RoutingZoneTypeType")  | - |
@@ -272,7 +272,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SourceAttributionType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SourceAttributionType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Attribution | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | SourceSupplier | [oh_SourceSupplierType](#oh_SourceSupplierType "oh_SourceSupplierType")  | - |
 
@@ -281,7 +281,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SourceSupplierNoteType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SourceSupplierNoteType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Type | [oh_SourceSupplierNoteTypeType](#oh_SourceSupplierNoteTypeType "oh_SourceSupplierNoteTypeType")  | - |
 |  |  | Text | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Href | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -292,7 +292,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SourceSupplierType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SourceSupplierType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Title | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Href | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Note | [oh_SourceSupplierNoteType](#oh_SourceSupplierNoteType "oh_SourceSupplierNoteType")  | - |
@@ -302,17 +302,17 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_TimeDependentRestrictionType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_TimeDependentRestrictionType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ValidityPeriod | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
-|  |  | Type | [oh_TimeDependentRestrictionTypeT](#oh_TimeDependentRestrictionTypeT "oh_TimeDependentRestrictionTypeT")  | - |
+|  |  | Type | [oh_TimeDependentRestrictionTypeType](#oh_TimeDependentRestrictionTypeType "oh_TimeDependentRestrictionTypeType")  | - |
 
 
 <a name="oh_VehicleRestrictionType"/>
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_VehicleRestrictionType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
-|  |  | ValidityPeriod | [oh_RecurringTimeIntervalsCombina](#oh_RecurringTimeIntervalsCombina "oh_RecurringTimeIntervalsCombina")  | - |
+| **oh_VehicleRestrictionType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+|  |  | ValidityPeriod | [oh_RecurringTimeIntervalsCombinationType](#oh_RecurringTimeIntervalsCombinationType "oh_RecurringTimeIntervalsCombinationType")  | - |
 |  |  | LicensePlatePattern | [oh_LicensePlatePatternType](#oh_LicensePlatePatternType "oh_LicensePlatePatternType")  | - |
 
 
@@ -320,7 +320,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_WaypointType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_WaypointType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | LinkId | [oh_LinkIdType](datatypes_base.md#oh_LinkIdType "oh_LinkIdType")  | - |
 |  |  | MappedPosition | [oh_GeoCoordinateType](datatypes_base.md#oh_GeoCoordinateType "oh_GeoCoordinateType")  | - |
 |  |  | OriginalPosition | [oh_GeoCoordinateType](datatypes_base.md#oh_GeoCoordinateType "oh_GeoCoordinateType")  | - |

@@ -41,7 +41,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_AddressDetailsType | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
+| **oh_AddressDetailsType** | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
 |  |  | CountryCode | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | StreetDetails | [oh_StreetDetailsType](#oh_StreetDetailsType "oh_StreetDetailsType")  | - |
 
@@ -50,7 +50,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_AddressNamesType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_AddressNamesType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Country | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | Collection |
 |  |  | State | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | Collection |
 |  |  | County | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | Collection |
@@ -64,7 +64,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_AddressType | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
+| **oh_AddressType** | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
 |  |  | Label | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | DistanceMarker | [oh_DistanceMarkerType](#oh_DistanceMarkerType "oh_DistanceMarkerType")  | - |
 |  |  | AddressLine | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -75,7 +75,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_AdminInfoType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_AdminInfoType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | LocalTime | [oh_DatetimeType](datatypes_base.md#oh_DatetimeType "oh_DatetimeType")  | - |
 |  |  | UTCTimezoneOffset | [oh_UTCTimeOffsetType](#oh_UTCTimeOffsetType "oh_UTCTimeOffsetType")  | - |
 |  |  | Currency | [oh_CurrencyType](#oh_CurrencyType "oh_CurrencyType")  | - |
@@ -88,7 +88,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_BaseAddressType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_BaseAddressType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Country | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | State | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | County | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -105,7 +105,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_BaseLocationType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_BaseLocationType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | LocationId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | LocationType | [oh_LocationTypeType](#oh_LocationTypeType "oh_LocationTypeType")  | - |
 |  |  | LocationName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -126,7 +126,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_CategoryType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_CategoryType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | CategoryId | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
 |  |  | CategorySystemId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 
@@ -135,7 +135,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_DistanceMarkerType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_DistanceMarkerType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Value | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Offset | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | Unit | [oh_DistanceUnitType](datatypes_base.md#oh_DistanceUnitType "oh_DistanceUnitType")  | - |
@@ -146,7 +146,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_GeocodeSuggestionType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_GeocodeSuggestionType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | label | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | language | [oh_LanguageCodeType](datatypes_base.md#oh_LanguageCodeType "oh_LanguageCodeType")  | - |
 |  |  | countryCode | [oh_CountryCodeType](datatypes_base.md#oh_CountryCodeType "oh_CountryCodeType")  | - |
@@ -160,7 +160,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_LinkInfoType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_LinkInfoType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | FunctionalClass | [oh_FunctionalClassType](#oh_FunctionalClassType "oh_FunctionalClassType")  | - |
 |  |  | TravelDirection | [oh_CardinalDirectionType](datatypes_base.md#oh_CardinalDirectionType "oh_CardinalDirectionType")  | - |
 |  |  | SpeedCategory | [oh_SpeedCategoryType](#oh_SpeedCategoryType "oh_SpeedCategoryType")  | - |
@@ -174,7 +174,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_LocationType | [oh_BaseLocationType](#oh_BaseLocationType "oh_BaseLocationType") |  |  |  |
+| **oh_LocationType** | [oh_BaseLocationType](#oh_BaseLocationType "oh_BaseLocationType") |  |  |  |
 |  |  | Related | [oh_RelatedLocationType](#oh_RelatedLocationType "oh_RelatedLocationType")  | - |
 
 
@@ -182,7 +182,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_MapReferenceType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_MapReferenceType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ReferenceId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | MapVersion | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | MapReleaseDate | [oh_DateType](datatypes_base.md#oh_DateType "oh_DateType")  | - |
@@ -203,7 +203,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_MatchQualityType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_MatchQualityType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Country | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | State | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | County | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
@@ -220,7 +220,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_ParsedRequestType | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
+| **oh_ParsedRequestType** | [oh_BaseAddressType](#oh_BaseAddressType "oh_BaseAddressType") |  |  |  |
 |  |  | LandmarkName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Label | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | AddressLine | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -231,7 +231,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_PlaceType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_PlaceType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | PlaceId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | PlaceName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Category | [oh_CategoryType](#oh_CategoryType "oh_CategoryType")  | - |
@@ -242,7 +242,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_RelatedLocationType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_RelatedLocationType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Type | [oh_RelationshipType](#oh_RelationshipType "oh_RelationshipType")  | - |
 |  |  | MatchType | [oh_MatchTypeType](#oh_MatchTypeType "oh_MatchTypeType")  | - |
 |  |  | RouteDistance | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
@@ -254,7 +254,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SearchResponseMetaInfoType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SearchResponseMetaInfoType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | RequestId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Timestamp | [oh_DatetimeType](datatypes_base.md#oh_DatetimeType "oh_DatetimeType")  | - |
 |  |  | NextPage | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
@@ -266,7 +266,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SearchResponseType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SearchResponseType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | MetaInfo | [oh_SearchResponseMetaInfoType](#oh_SearchResponseMetaInfoType "oh_SearchResponseMetaInfoType")  | - |
 |  |  | Views | [oh_SearchResponseViewType](#oh_SearchResponseViewType "oh_SearchResponseViewType")  | Collection |
 
@@ -275,7 +275,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SearchResponseViewType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SearchResponseViewType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | ViewId | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | PerformedSearch | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Results | [oh_SearchResultType](#oh_SearchResultType "oh_SearchResultType")  | Collection |
@@ -285,7 +285,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SearchResultType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SearchResultType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Relevance | [oh_DoubleType](datatypes_base.md#oh_DoubleType "oh_DoubleType")  | - |
 |  |  | Distance | [oh_DistanceType](datatypes_base.md#oh_DistanceType "oh_DistanceType")  | - |
 |  |  | Direction | [oh_HeadingType](datatypes_base.md#oh_HeadingType "oh_HeadingType")  | - |
@@ -302,7 +302,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_StreetDetailsType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_StreetDetailsType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | BaseName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | StreetType | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | StreetTypeBefore | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -316,7 +316,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SuggestedAddressType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SuggestedAddressType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Country | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | State | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | County | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
@@ -332,7 +332,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_SuggestionResponseType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_SuggestionResponseType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | suggestions | [oh_GeocodeSuggestionType](#oh_GeocodeSuggestionType "oh_GeocodeSuggestionType")  | Collection |
 
 
@@ -340,7 +340,7 @@ Go to
 
 | Structure | Based on | Members | Type | Aggregator |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| oh_TimezoneType | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
+| **oh_TimezoneType** | [oh_Structure](datatypes_base.md#oh_Structure "oh_Structure") |  |  |  |
 |  |  | Id | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType")  | - |
 |  |  | Offset | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |
 |  |  | RawOffset | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType")  | - |

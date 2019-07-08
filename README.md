@@ -14,13 +14,14 @@ Datatype classes define the objects used to access the Here location platform, s
 
 These datatype classes are used by the resource classes to parameterize the calls to the platform services and to interpret and communicate the result to the application.
 
-The resource classes are generally composed of OH datatype objects that may be set by the application and of Get* methods that fetch the information from the platform (for instance, `GetLocation()` or `GetImage()`) and store it in a response object.
+The resource classes are generally composed of OH datatype objects that may be set by the application and of Get methods that fetch the information from the platform (for instance, `GetLocation()` or `GetImage()`) and store it in a response object.
 
 Applications don’t instantiate the resources classes directly. Instead, they use `overHere`, a manager class that organizes the access to the platform and the instantiation of resource classes through a SetResource() method.
 
 Further documentation:
 
 - [Datatypes](docs/datatypes.md "Datatypes")
+- [Resources](docs/resources.md "Resources")
 
 ## Getting started
 

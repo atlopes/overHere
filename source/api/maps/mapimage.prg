@@ -93,6 +93,7 @@ DEFINE CLASS oh_MapImage AS oh_MapsResource
 
 		This.AddObjArgument("t", This.MapScheme)
 		This.AddObjArgument("z", This.ZoomLevel)
+		This.AddObjArgument("pview", This.PoliticalView)
 
 		This.AddObjArgument("ml", This.Language)
 

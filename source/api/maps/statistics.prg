@@ -15,7 +15,7 @@ DEFINE CLASS oh_MapStatistics AS oh_MapImageText
 	ResourceName = "stat"
 
 	* statistics graph objects
-	ADD OBJECT GraphObjects AS Collection
+	ADD OBJECT GraphObjects AS Collection && OF oh_GraphObjectType
 	ADD OBJECT GraphObjectsConfig AS oh_GraphObjectConfigType
 
 	GraphObjectShadow = .F.
@@ -43,7 +43,7 @@ DEFINE CLASS oh_MapStatistics AS oh_MapImageText
 		ELSE
 			m.ItemIndex = 0
 			FOR EACH m.GO IN This.GraphObjects
-				IF This.AddObjArgument("o" + LTRIM(STR(m.ItemIndex, 10, 0)), m.GO)
+				IF This.AddObjArgument("o" + LTRIM(STR(m.ItemIndex)), m.GO)
 					m.ItemIndex = m.ItemIndex + 1
 				ENDIF
 			ENDFOR

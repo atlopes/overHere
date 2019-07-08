@@ -13,8 +13,8 @@ DO (ADDBS(JUSTPATH(SYS(16))) + "mapimage")
 DEFINE CLASS oh_MapImageText AS oh_MapImage
 
 	* markers and highlights
-	ADD OBJECT CustomText AS Collection
-	ADD OBJECT CustomTextXY AS Collection
+	ADD OBJECT CustomText AS Collection && OF oh_CustomTextCoordType
+	ADD OBJECT CustomTextXY AS Collection && OF oh_CustomTextXYType
 	ADD OBJECT CustomTextConfig AS oh_CustomTextConfigType
 
 	_MemberData = '<VFPData>' + ;
@@ -39,7 +39,7 @@ DEFINE CLASS oh_MapImageText AS oh_MapImage
 			m.ItemIndex = IIF(This.AddObjArgument("tx", This.CustomText.Item(1), .T.), 1, 0)
 		ELSE
 			FOR EACH m.CT IN This.CustomText
-				IF This.AddObjArgument("tx" + LTRIM(STR(m.ItemIndex, 10, 0)), m.CT, .T.)
+				IF This.AddObjArgument("tx" + LTRIM(STR(m.ItemIndex)), m.CT, .T.)
 					m.ItemIndex = m.ItemIndex + 1
 				ENDIF
 			ENDFOR
@@ -49,7 +49,7 @@ DEFINE CLASS oh_MapImageText AS oh_MapImage
 				m.ItemIndex = IIF(This.AddObjArgument("tx.xy", This.CustomTextXY.Item(1), .T.), 1, 0)
 			ELSE
 				FOR EACH m.CT IN This.CustomTextXY
-					IF This.AddObjArgument("tx.xy" + LTRIM(STR(m.ItemIndex, 10, 0)), m.CT, .T.)
+					IF This.AddObjArgument("tx.xy" + LTRIM(STR(m.ItemIndex)), m.CT, .T.)
 						m.ItemIndex = m.ItemIndex + 1
 					ENDIF
 				ENDFOR

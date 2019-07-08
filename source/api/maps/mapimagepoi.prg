@@ -13,8 +13,8 @@ DO (ADDBS(JUSTPATH(SYS(16))) + "mapimage")
 DEFINE CLASS oh_MapImagePOI AS oh_MapImage
 
 	* markers and highlights
-	ADD OBJECT PointsOfInterest AS Collection
-	ADD OBJECT PointsOfInterestMarks AS Collection
+	ADD OBJECT PointsOfInterest AS Collection && OF oh_PointOfInterestType
+	ADD OBJECT PointsOfInterestMarks AS Collection && OF oh_GeoCoordinateType
 	ADD OBJECT PointsOfInterestConfig AS oh_PointOfInterestConfigType
 
 	_MemberData = '<VFPData>' + ;

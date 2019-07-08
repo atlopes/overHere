@@ -18,7 +18,7 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 
 	* itinerary definition
 	ADD OBJECT Mode AS oh_RoutingModeType
-	ADD OBJECT Waypoints AS Collection
+	ADD OBJECT Waypoints AS Collection && OF oh_WaypointParameterType
 	ADD OBJECT Alternatives AS oh_IntegerType
 
 	* metainformation
