@@ -177,7 +177,7 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 		This.AddObjArgument("avoidareas", This.AvoidAreas)
 		This.AddObjArgument("avoidlinks", This.AvoidLinks)
 		This.AddObjArgument("avoidseasonalclosures", This.AvoidSeasonalClosures)
-		This.AddObjArgument("avoidturns", This.AvoidSeasonalClosures)
+		This.AddObjArgument("avoidturns", This.AvoidTurns)
 		This.AddObjArgument("excludezonetypes", This.ExcludeZoneTypes)
 		This.AddObjArgument("excludecountries", This.ExcludeCountries)
 

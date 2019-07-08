@@ -17,12 +17,12 @@ Go to
 
 | Method | Args | Result | Notes |
 | --- | --- | --- | --- |
-| Calculate | Request AS Logical | [oh_CalculateRouteResponseType](datatypes_route#oh_CalculateRouteResponseType "oh_CalculateRouteResponseType") (.NULL. if failed) | `m.Request` = .T. if route calculation is to be requested from server, otherwise from previous request if available |
+| Calculate | Request AS Logical | [oh_CalculateRouteResponseType](datatypes_route.md#oh_CalculateRouteResponseType "oh_CalculateRouteResponseType") (.NULL. if failed) | `m.Request` = .T. if route calculation is to be requested from server, otherwise from previous request if available |
 | Request | - | Logical (.T. if success) | - |
 
 | Response property | Type |
 | --- | --- |
-| Route | [oh_CalculateRouteResponseType](datatypes_route#oh_CalculateRouteResponseType "oh_CalculateRouteResponseType") |
+| Route | [oh_CalculateRouteResponseType](datatypes_route.md#oh_CalculateRouteResponseType "oh_CalculateRouteResponseType") |
 
 | Parameter | Based on | Aggregator | Here name |
 | --- | --- | --- | --- |

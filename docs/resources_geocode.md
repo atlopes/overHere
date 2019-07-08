@@ -20,12 +20,12 @@ Go to
 
 | Method | Args | Result | Notes |
 | --- | --- | --- | --- |
-| GetLocation | Request AS Logical | [oh_SearchResponseType](datatypes_geocode#oh_SearchResponseType "oh_SearchResponseType") (.NULL. if failed) | `m.Request` = .T. if location is to be requested from server, otherwise from previous request if available |
+| GetLocation | Request AS Logical | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") (.NULL. if failed) | `m.Request` = .T. if location is to be requested from server, otherwise from previous request if available |
 | Request | - | Logical (.T. if success) | - |
 
 | Response property | Type |
 | --- | --- |
-| Location | [oh_SearchResponseType](datatypes_geocode#oh_SearchResponseType "oh_SearchResponseType") |
+| Location | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") |
 
 | Parameter | Based on | Aggregator | Here name |
 | --- | --- | --- | --- |
@@ -63,12 +63,12 @@ Go to
 
 | Method | Args | Result | Notes |
 | --- | --- | --- | --- |
-| GetLocation | Request AS Logical | [oh_SearchResponseType](datatypes_geocode#oh_SearchResponseType "oh_SearchResponseType") (.NULL. if failed) | `m.Request` = .T. if location is to be requested from server, otherwise from previous request if available |
+| GetLocation | Request AS Logical | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") (.NULL. if failed) | `m.Request` = .T. if location is to be requested from server, otherwise from previous request if available |
 | Request | - | Logical (.T. if success) | - |
 
 | Response property | Type |
 | --- | --- |
-| Location | [oh_SearchResponseType](datatypes_geocode#oh_SearchResponseType "oh_SearchResponseType") |
+| Location | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") |
 
 | Parameter | Based on | Aggregator | Here name |
 | --- | --- | --- | --- |
@@ -108,12 +108,12 @@ Go to
 
 | Method | Args | Result | Notes |
 | --- | --- | --- | --- |
-| GetSuggestion | Request AS Logical | [oh_SuggestionResponseType](datatypes_geocode#oh_SuggestionResponseType "oh_SuggestionResponseType") (.NULL. if failed) | `m.Request` = .T. if suggestion is to be requested from server, otherwise from previous request if available |
+| GetSuggestion | Request AS Logical | [oh_SuggestionResponseType](datatypes_geocode.md#oh_SuggestionResponseType "oh_SuggestionResponseType") (.NULL. if failed) | `m.Request` = .T. if suggestion is to be requested from server, otherwise from previous request if available |
 | Request | NoCall AS Logical | Logical (.T. if success) | `m.NoCall` = .T. if the request is to be built from a completed asynchronous call |
 
 | Response property | Type |
 | --- | --- |
-| Suggestion | [oh_SuggestionResponseType](datatypes_geocode#oh_SuggestionResponseType "oh_SuggestionResponseType") |
+| Suggestion | [oh_SuggestionResponseType](datatypes_geocode.md#oh_SuggestionResponseType "oh_SuggestionResponseType") |
 
 | Parameter | Based on | Aggregator | Here name |
 | --- | --- | --- | --- |
