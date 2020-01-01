@@ -221,7 +221,7 @@ DEFINE CLASS oh_CalculateRoute AS oh_RouteResource
 		This.AddObjArgument("metricsystem", This.MetricSystem)
 		This.AddObjArgument("viewbounds", This.ViewBounds)
 		This.AddObjArgument("returnelevation", This.ReturnElevation)
-		This.AddObjArgument("returnelevation", This.SpeedProfile)
+		This.AddObjArgument("speedprofile", This.SpeedProfile)
 
 	ENDPROC
 

@@ -12,17 +12,23 @@ ENDIF
 
 DEFINE CLASS oh_LatitudeType AS oh_DoubleType
 
+	RegExPattern = "^\s*[-+NS]?\d+(\.\d+)?\s*$"
 	Precision = 7
 	Minimum = -90
 	Maximum = 90
+	PositiveSign = "N+"
+	NegativeSign = "S-"
 
 ENDDEFINE
 
 DEFINE CLASS oh_LongitudeType AS oh_DoubleType
 
+	RegExPattern = "^\s*[-+EW]?\d+(\.\d+)?\s*$"
 	Precision = 7
 	Minimum = -180
 	Maximum = 180
+	PositiveSign = "E+"
+	NegativeSign = "W-"
 
 ENDDEFINE
 
@@ -1197,14 +1203,19 @@ ENDDEFINE
 DEFINE CLASS oh_DoubleType AS oh_Datatype
 
 	RequireRegEx = .T.
+	RegExPattern = "^\s*-?\d+(\.\d+)?\s*$"
 	Precision = 4
 	Minimum = .NULL.
 	Maximum = .NULL.
+	PositiveSign = "+"
+	NegativeSign = "-"
 
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="precision" type="property" display="Precision" />' + ;
 						'<memberdata name="minimum" type="property" display="Minimum" />' + ;
 						'<memberdata name="maximum" type="property" display="Maximum" />' + ;
+						'<memberdata name="positivesign" type="property" display="PositiveSign" />' + ;
+						'<memberdata name="negativesign" type="property" display="NegativeSign" />' + ;
 						'</VFPData>'
 
 	FUNCTION IsValid (Input AS Double) AS Logical
@@ -1219,11 +1230,16 @@ DEFINE CLASS oh_DoubleType AS oh_Datatype
 
 		LOCAL Result AS Logical
 
-		This.RegEx.Pattern = "^\s*-?\d+(\.\d+)?\s*$"
+		This.RegEx.Pattern = This.RegExPattern
 		m.Result = This.RegEx.Test(m.Input)
 
 		IF m.Result
-			m.Result = This.Set(VAL(CHRTRAN(m.Input, ".", SET("Point"))))
+			m.Result = This.Set(VAL(CHRTRAN(m.Input, "." + ;
+																This.PositiveSign + ;
+																This.NegativeSign, ;
+																	SET("Point") + ;
+																	REPLICATE("+", LEN(This.PositiveSign)) + ;
+																	REPLICATE("-", LEN(This.NegativeSign)))))
 		ENDIF
 
 		This._IsSet = m.Result
@@ -1348,6 +1364,7 @@ DEFINE CLASS oh_Datatype AS oh_Base
 	PROTECTED _IsSet
 	Value = .NULL.
 	RegEx = .NULL.
+	RegExPattern = ""
 	RequireRegEx = .F.
 	_IsSet = .F.
 	OverHereClass = "regular"
@@ -1356,6 +1373,7 @@ DEFINE CLASS oh_Datatype AS oh_Base
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="value" type="property" display="Value" />' + ;
 						'<memberdata name="regex" type="property" display="RegEx" />' + ;
+						'<memberdata name="regexpattern" type="property" display="RegExPattern" />' + ;
 						'<memberdata name="requireregex" type="property" display="RequireRegEx" />' + ;
 						'<memberdata name="_setxml" type="property" display="_SetXML" />' + ;
 						'<memberdata name="preinit" type="method" display="PreInit" />' + ;
