@@ -10,6 +10,43 @@ ENDIF
 
 #DEFINE SAFETHIS			ASSERT !USED("This") AND TYPE("This") == "O"
 
+DEFINE CLASS oh_MapRegionType AS oh_Datatype
+
+	ADD OBJECT RegionCoords AS oh_GeoCoordinatesListType
+	ADD OBJECT Radius AS oh_DistanceType
+	ADD OBJECT Config AS oh_MapRegionConfigType
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="regioncoords" type="property" display="RegionCoords" />' + ;
+						'<memberdata name="radius" type="property" display="Radius" />' + ;
+						'<memberdata name="config" type="property" display="Config" />' + ;
+						'</VFPData>'
+
+ENDDEFINE
+	
+DEFINE CLASS oh_MapRegionConfigType AS oh_Datatype
+
+	ADD OBJECT FillColor AS oh_ColorType
+	ADD OBJECT LineColor AS oh_ColorType
+	ADD OBJECT LineWidth AS oh_IntegerType WITH Minimum = 1, Maximum = 20
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="fillcolor" type="property" display="FillColor" />' + ;
+						'<memberdata name="linecolor" type="property" display="LineColor" />' + ;
+						'<memberdata name="linewidth" type="property" display="LineWidth" />' + ;
+						'</VFPData>'
+
+	FUNCTION Reset ()
+
+		DODEFAULT()
+		This.FillColor.Reset()
+		This.LineColor.Reset()
+		This.LineWidth.Reset()
+
+	ENDFUNC
+
+ENDDEFINE
+
 DEFINE CLASS oh_MapRouteMarkerGroupType AS oh_Datatype
 
 	ADD OBJECT RouteCoords AS oh_GeoCoordinatesListType

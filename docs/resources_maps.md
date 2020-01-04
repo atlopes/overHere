@@ -9,6 +9,7 @@ Go to
 * [MapView](#mapview "MapView")
 * [RouteMap](#routemap "RouteMap")
 * [MapStatistics](#mapstatistics "MapStatistics")
+* [RegionMap](#regionmap "RegionMap")
 
 <a name="mapview" />
 
@@ -133,3 +134,35 @@ Go to
 | Resolution | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | ppi |
 | ZoomLevel | [oh_ZoomLevelType](datatypes_maps.md#oh_ZoomLevelType "oh_ZoomLevelType") | - | z |
 
+<a name="regionmap" />
+
+### RegionMap
+
+| Class | Source Location | Based on | Here API reference | Asynchronous |
+| --- | --- | --- | --- | --- |
+| oh_RegionMap | [mapregion.prg](../source/api/maps/mapregion.prg "mapregion.prg") | [oh_MapImageText](../source/api/maps/mapimagetext.prg "oh_MapImageText") | [Region resource](https://developer.here.com/documentation/map-image/topics/resource-region.html "Region Resource") | Disabled |
+
+| Method | Args | Result | Notes |
+| --- | --- | --- | --- |
+| GetImage | Request AS Logical | Blob (0h if failed) | `m.Request` = .T. if image is to be requested from server, otherwise from previous request if available |
+| Request | - | Logical (.T. if success) | - |
+
+| Response property | Type |
+| --- | --- |
+| PictureObject | Image |
+
+| Parameter | Based on | Aggregator | Here name |
+| --- | --- | --- | --- |
+| CustomText | [oh_CustomTextCoordType](datatypes_maps.md#oh_CustomTextCoordType "oh_CustomTextCoordType") | Collection | txc |
+| CustomTextConfig | [oh_CustomTextConfigType](datatypes_maps.md#oh_CustomTextConfigType "oh_CustomTextConfigType") | - | txc |
+| CustomTextXY | [oh_CustomTextXYType](datatypes_maps.md#oh_CustomTextXYType "oh_CustomTextXYType") | Collection | tx.xy |
+| ImageCompression | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | q |
+| ImageFormat | [oh_ImageFormatType](datatypes_maps.md#oh_ImageFormatType "oh_ImageFormatType") | - | f |
+| ImageHeight | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | h |
+| ImageWidth | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | w |
+| Language | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | ml |
+| MapScheme | [oh_MapSchemeType](datatypes_maps.md#oh_MapSchemeType "oh_MapSchemeType") | - | t |
+| PoliticalView | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | pview |
+| Regions | [oh_MapRegionType](datatypes_maps.md#oh_MapRegionType "oh_MapRegionType") | Collection | a, fc, lc, lw, rad |
+| Resolution | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | ppi |
+| ZoomLevel | [oh_ZoomLevelType](datatypes_maps.md#oh_ZoomLevelType "oh_ZoomLevelType") | - | z |

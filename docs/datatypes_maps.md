@@ -20,6 +20,8 @@ Go to
 | <a name="oh_GraphObjectConfigType"/>oh_GraphObjectConfigType | [oh_Datatype](datatypes_base.md#oh_Datatype "oh_Datatype") | - | - |
 | <a name="oh_GraphObjectType"/>oh_GraphObjectType | [oh_Datatype](datatypes_base.md#oh_Datatype "oh_Datatype") | Lat AS Double, Long AS Double, Value AS Double, Fill AS StringOrNumber, BorderColor AS StringOrNumber | - |
 | <a name="oh_ImageFormatType"/>oh_ImageFormatType | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | - |
+| <a name="oh_MapRegionConfigType"/>oh_MapRegionConfigType | [oh_Datatype](datatypes_base.md#oh_Datatype "oh_Datatype") | - | - |
+| <a name="oh_MapRegionType"/>oh_MapRegionType | [oh_Datatype](datatypes_base.md#oh_Datatype "oh_Datatype") | - | - |
 | <a name="oh_MapRouteMarkerGroupConfigType"/>oh_MapRouteMarkerGroupConfigType | [oh_PointOfInterestConfigType](#oh_PointOfInterestConfigType "oh_PointOfInterestConfigType") | - | - |
 | <a name="oh_MapRouteMarkerGroupType"/>oh_MapRouteMarkerGroupType | [oh_Datatype](datatypes_base.md#oh_Datatype "oh_Datatype") | - | - |
 | <a name="oh_MapSchemeType"/>oh_MapSchemeType | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | - |
