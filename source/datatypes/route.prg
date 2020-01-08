@@ -62,8 +62,8 @@ DEFINE CLASS oh_GeoWaypointParameterType AS oh_WaypointParameterType
 		IF !EMPTY(m.Type)
 			This._IsSet = This._IsSet AND This.Type.Set(m.Type)
 		ENDIF
-		IF !EMPTY(m.StopOverDuration)
-			This._IsSet = This._IsSet AND This.StopOverDuration(m.StopOverDuration)
+		IF VARTYPE(m.StopOverDuration) == "N"
+			This._IsSet = This._IsSet AND This.StopOverDuration.Set(m.StopOverDuration)
 		ENDIF
 		IF VARTYPE(m.Radius) == "N"
 			This._IsSet = This._IsSet AND This.Radius.Set(m.Radius)
@@ -131,7 +131,7 @@ DEFINE CLASS oh_GeoWaypointParameterType AS oh_WaypointParameterType
 				m.Sep = m.Sep + ";"
 			ENDIF
 		ELSE
-			m.Sep = m.Sep + m.Sep
+			m.Sep = m.Sep + ";"
 		ENDIF
 		IF This.Heading.IsSet()
 			m.Result = m.Result + m.Sep + This.Heading.ToString()
