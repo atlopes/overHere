@@ -24,6 +24,7 @@ DEFINE CLASS overHere AS Custom
 	HTTP = .NULL.
 	App_ID = ""
 	App_Code = ""
+	Api_Key = ""
 	Production = .F.
 
 	ADD OBJECT AsyncResources AS Collection
@@ -32,6 +33,7 @@ DEFINE CLASS overHere AS Custom
 						'<memberdata name="http" type="property" display="HTTP" />' + ;
 						'<memberdata name="app_id" type="property" display="App_ID" />' + ;
 						'<memberdata name="app_code" type="property" display="App_Code" />' + ;
+						'<memberdata name="api_key" type="property" display="Api_Key" />' + ;
 						'<memberdata name="production" type="property" display="Production" />' + ;
 						'<memberdata name="asyncresources" type="property" display="AsyncResources" />' + ;
 						'<memberdata name="setresource" type="method" display="SetResource" />' + ;
@@ -154,10 +156,17 @@ DEFINE CLASS overHere AS Custom
 
 	ENDFUNC
 
-	FUNCTION SetCredentials (Id AS String, Code AS String)
+	FUNCTION SetCredentials (IdOrKey AS String, Code AS String)
 
-		This.App_ID = m.Id
-		This.App_Code = m.Code
+		IF PCOUNT() = 1 OR EMPTY(m.Code)
+			This.Api_Key = m.IdOrKey
+			This.App_ID = ""
+			This.App_Code = ""
+		ELSE
+			This.App_ID = m.IdOrKey
+			This.App_Code = m.Code
+			This.Api_Key = ""
+		ENDIF
 
 	ENDFUNC
 			
@@ -165,7 +174,11 @@ DEFINE CLASS overHere AS Custom
 
 		SAFETHIS
 
-		RETURN This.ComposeArgument("app_id", This.App_ID) + "&" + This.ComposeArgument("app_code", This.App_Code)
+		IF !EMPTY(This.Api_Key)
+			RETURN This.ComposeArgument("apiKey", This.Api_Key)
+		ELSE
+			RETURN This.ComposeArgument("app_id", This.App_ID) + "&" + This.ComposeArgument("app_code", This.App_Code)
+		ENDIF
 
 	ENDFUNC
 
@@ -284,18 +297,12 @@ DEFINE CLASS oh_Resource AS Custom
 						'<memberdata name="registercallbackhandler" type="method" display="RegisterCallbackHandler" />' + ;
 						'</VFPData>'
 
-	FUNCTION Init (API AS oh_API)
-
-		SAFETHIS
-
-		LOCAL ServerEnvironment AS String
+	FUNCTION Init (API AS overHere)
 
 		IF VARTYPE(m.API) == "O"
 			This.APIService = m.API
-			m.ServerEnvironment = IIF(m.API.Production, "", ".cit")
-			This.ResourceURL = STRTRAN(This.ResourceURL, "{cit}", m.ServerEnvironment)
 		ELSE
-			RETURN .F.
+			RETURN .NULL.
 		ENDIF
 
 	ENDFUNC
@@ -359,7 +366,16 @@ DEFINE CLASS oh_Resource AS Custom
 
 		SAFETHIS
 
-		RETURN This.ResourceURL + This.ResourcePath + This.ResourceName + "?" + This.APIService.ComposeCredentials()
+		LOCAL ServerEnvironment AS String
+		LOCAL ResourceURL AS String
+
+		m.ServerEnvironment = IIF(This.APIService.Production OR !EMPTY(This.APIService.Api_Key), "", ".cit")
+		m.ResourceURL = STRTRAN(This.ResourceURL, "{cit}", m.ServerEnvironment)
+		IF !EMPTY(This.APIService.Api_Key)
+			m.ResourceURL = STRTRAN(m.ResourceURL, ".api.here.", ".ls.hereapi.", 1, 1)
+		ENDIF
+
+		RETURN m.ResourceURL + This.ResourcePath + This.ResourceName + "?" + This.APIService.ComposeCredentials()
 
 	ENDFUNC
 
