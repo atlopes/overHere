@@ -204,6 +204,11 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 	FUNCTION Parse (Input AS String) AS Logical
 
 		LOCAL ARRAY Parts(1)
+		LOCAL RegEx AS VBScript.RegExp
+		LOCAL Matches AS VBScript.Matches
+		LOCAL SubMatches AS VBScript.SubMatches
+		LOCAL Lat AS Double
+		LOCAL Lon AS Double
 		LOCAL Result AS Logical
 
 		IF BETWEEN(ALINES(m.Parts, m.Input, 0, ","), 2, 3)
@@ -216,8 +221,55 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 					This.Altitude.Reset()
 				ENDIF
 			ENDIF
+
 		ELSE
+
 			m.Result = .F.
+
+			TRY
+
+				m.RegEx = CREATEOBJECT("VBScript.RegExp")
+
+				m.Regex.Pattern = "^\s*(\d+)\s*[°º]?\s*((\d+)'(\d+(\.\d+)?)(''|" + '")' + "|\d+(\.\d+))\s*(N|S)\s*" + ;
+											"(\d+)\s*[°º]?\s*((\d+)'(\d+(\.\d+)?)(''|" + '")' + "|\d+(\.\d+))\s*(E|W)\s*$"
+
+				m.Matches = m.Regex.Execute(m.Input)
+				IF !ISNULL(m.Matches) AND m.Matches.Count = 1
+
+					m.SubMatches = m.Matches.Item(0).SubMatches
+
+					IF !ISNULL(m.SubMatches.Item(0)) AND !ISNULL(m.SubMatches.Item(1)) AND !ISNULL(m.SubMatches.Item(7)) ;
+							AND !ISNULL(m.SubMatches.Item(8)) AND !ISNULL(m.SubMatches.Item(9)) AND !ISNULL(m.SubMatches.Item(15))
+
+						m.Lat = VAL(m.SubMatches.Item(0))
+						m.Lon = VAL(m.SubMatches.Item(8))
+
+						IF ISNULL(m.SubMatches.Item(2))
+							m.Lat = m.Lat + VAL(CHRTRAN(m.SubMatches.Item(1), ".", SET("Point"))) / 60
+							m.Lon = m.Lon + VAL(CHRTRAN(m.SubMatches.Item(9), ".", SET("Point"))) / 60
+						ELSE
+							m.Lat = m.Lat + VAL(m.SubMatches.Item(2)) / 60 + INT(VAL(m.SubMatches.Item(3))) / 3600 + ;
+								VAL("0" + CHRTRAN(m.SubMatches.Item(4), ".", SET("Point"))) * 1.2 / 3600
+							m.Lon = m.Lon + VAL(m.SubMatches.Item(10)) / 60 + INT(VAL(m.SubMatches.Item(11))) / 3600 + ;
+								VAL("0" + CHRTRAN(m.SubMatches.Item(12), ".", SET("Point"))) * 1.2 / 3600
+						ENDIF
+
+						IF m.SubMatches.Item(7) == "S"
+							m.Lat = -m.Lat
+						ENDIF
+						IF m.SubMatches.Item(15) == "W"
+							m.Lon = -m.Lon
+						ENDIF
+
+						m.Result = This.Latitude.Set(m.Lat) AND This.Longitude.Set(m.Lon)
+						IF m.Result
+							This.Altitude.Reset()
+						ENDIF
+					ENDIF
+				ENDIF
+			CATCH
+			ENDTRY
+
 		ENDIF
 
 		This._IsSet = m.Result
