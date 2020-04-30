@@ -24,6 +24,7 @@ Go to
 | <a name="oh_MatchTypeType"/>oh_MatchTypeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_RelationshipType"/>oh_RelationshipType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_ReverseGeocodeModeType"/>oh_ReverseGeocodeModeType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
+| <a name="oh_ReverseGeocodeSortByType"/>oh_ReverseGeocodeSortByType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_SpeedCategoryType"/>oh_SpeedCategoryType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_SpeedLimitType"/>oh_SpeedLimitType | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | Limit AS Integer, Unit AS String | - |
 | <a name="oh_SpeedLimitUnitType"/>oh_SpeedLimitUnitType | [oh_EnumerationType](datatypes_base.md#oh_EnumerationType "oh_EnumerationType") | - | - |

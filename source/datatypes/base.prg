@@ -211,6 +211,7 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 		LOCAL Lon AS Double
 		LOCAL Result AS Logical
 
+		* receive a pair of coordinates as input
 		IF BETWEEN(ALINES(m.Parts, m.Input, 0, ","), 2, 3)
 
 			m.Result = This.Latitude.Parse(m.Parts(1)) AND This.Longitude.Parse(m.Parts(2))
@@ -226,10 +227,14 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 
 			m.Result = .F.
 
+			* try to read a pair of DMS coordinates
 			TRY
 
+				* create a regex object on demand, only
 				m.RegEx = CREATEOBJECT("VBScript.RegExp")
 
+				* allowed formats: 0°00'00.0''N 0°00'00.0''W
+				*                  0°0.000N 0°0.000W
 				m.Regex.Pattern = "^\s*(\d+)\s*[°º]?\s*((\d+)'(\d+(\.\d+)?)(''|" + '")' + "|\d+(\.\d+))\s*(N|S)\s*" + ;
 											"(\d+)\s*[°º]?\s*((\d+)'(\d+(\.\d+)?)(''|" + '")' + "|\d+(\.\d+))\s*(E|W)\s*$"
 
@@ -238,16 +243,19 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 
 					m.SubMatches = m.Matches.Item(0).SubMatches
 
+					* these groups are mandatories: degree, minutes/fraction, and cardinal direction
 					IF !ISNULL(m.SubMatches.Item(0)) AND !ISNULL(m.SubMatches.Item(1)) AND !ISNULL(m.SubMatches.Item(7)) ;
 							AND !ISNULL(m.SubMatches.Item(8)) AND !ISNULL(m.SubMatches.Item(9)) AND !ISNULL(m.SubMatches.Item(15))
 
 						m.Lat = VAL(m.SubMatches.Item(0))
 						m.Lon = VAL(m.SubMatches.Item(8))
 
+						* Degree + Minutes
 						IF ISNULL(m.SubMatches.Item(2))
 							m.Lat = m.Lat + VAL(CHRTRAN(m.SubMatches.Item(1), ".", SET("Point"))) / 60
 							m.Lon = m.Lon + VAL(CHRTRAN(m.SubMatches.Item(9), ".", SET("Point"))) / 60
 						ELSE
+						* Degree + minutes + seconds
 							m.Lat = m.Lat + VAL(m.SubMatches.Item(2)) / 60 + INT(VAL(m.SubMatches.Item(3))) / 3600 + ;
 								VAL("0" + CHRTRAN(m.SubMatches.Item(4), ".", SET("Point"))) * 1.2 / 3600
 							m.Lon = m.Lon + VAL(m.SubMatches.Item(10)) / 60 + INT(VAL(m.SubMatches.Item(11))) / 3600 + ;
@@ -261,6 +269,7 @@ DEFINE CLASS oh_GeoCoordinateType AS oh_Datatype
 							m.Lon = -m.Lon
 						ENDIF
 
+						* the values for latitude and longitude are now transformed into degrees
 						m.Result = This.Latitude.Set(m.Lat) AND This.Longitude.Set(m.Lon)
 						IF m.Result
 							This.Altitude.Reset()

@@ -8,6 +8,7 @@ Go to
 
 * [GeocodeSearch](#geocodesearch "GeocodeSearch")
 * [LandmarkSearch](#landmarksearch "LandmarkSearch")
+* [ReverseGeocode](#reversegeocode "ReverseGeocode")
 * [GeocodeAutoComplete](#geocodeautocomplete "GeocodeAutoComplete")
 
 <a name="geocodesearch" />
@@ -96,6 +97,42 @@ Go to
 | SearchText | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | searchtext |
 | StateName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | state |
 | StreetName | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | street |
+| StrictLanguageMode | [oh_BooleanType](datatypes_base.md#oh_BooleanType "oh_BooleanType") | - | strictlanguagemode |
+
+<a name="reversegeocode" />
+
+### ReverseGeocode
+
+| Class | Source Location | Based on | Here API reference | Asynchronous |
+| --- | --- | --- | --- | --- |
+| oh_ReverseGeocode | [reverse.prg](../source/api/geocoding/reverse.prg "reverse.prg") | [oh_ReverseGeocodeResource](../source/api/geocoding/geocode.prg "oh_ReverseGeocodeResource") | [Reserve Geocode resource](https://developer.here.com/documentation/geocoder/dev_guide/topics/resource-reverse-geocode.html "Reverse Geocode Resource") | Disabled |
+
+| Method | Args | Result | Notes |
+| --- | --- | --- | --- |
+| GetLocation | Request AS Logical | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") (.NULL. if failed) | `m.Request` = .T. if location is to be requested from server, otherwise from previous request if available |
+| Request | - | Logical (.T. if success) | - |
+
+| Response property | Type |
+| --- | --- |
+| Location | [oh_SearchResponseType](datatypes_geocode.md#oh_SearchResponseType "oh_SearchResponseType") |
+
+| Parameter | Based on | Aggregator | Here name |
+| --- | --- | --- | --- |
+| AdditionalData | [oh_KeyValuePairsListType](datatypes_base.md#oh_KeyValuePairsListType "oh_KeyValuePairsListType") | - | additionaldata |
+| AddressAttributes | [oh_ValuesListType](datatypes_base.md#oh_ValuesListType "oh_ValuesListType") | - | addressattributes |
+| Level | [oh_MatchLevelType](datatypes_geocode.md#oh_MatchLevelType "oh_MatchLevelType") | - | level |
+| Language | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | language |
+| Level | [oh_MatchLevelType](datatypes_geocode.md#oh_MatchLevelType "oh_MatchLevelType") | - | level |
+| LocationAttributes | [oh_ValuesListType](datatypes_base.md#oh_ValuesListType "oh_ValuesListType") | - | locationattributes |
+| MaxResults | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | maxresults |
+| MinResults | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | minresults |
+| Mode | [oh_ReverseGeocodeModeType](datatypes_geocode.md#oh_ReverseGeocodeModeType "oh_ReverseGeocodeModeType") | - | mode |
+| PageInformation | [oh_IntegerType](datatypes_base.md#oh_IntegerType "oh_IntegerType") | - | pageinformation |
+| PoliticalView | [oh_StringType](datatypes_base.md#oh_StringType "oh_StringType") | - | politicalview |
+| Pos | [oh_GeoPositionType](datatypes_base.md#oh_GeoPositionType "oh_GeoPositionType") | - | pos |
+| Proximity | [oh_GeoProximityType](datatypes_base.md#oh_GeoProximityType "oh_GeoProximityType") | - | prox |
+| ResponseAttributes | [oh_ValuesListType](datatypes_base.md#oh_ValuesListType "oh_ValuesListType") | - | responseattributes |
+| SortBy | [oh_ReverseGeocodeSortByType](datatypes_geocode.md#oh_ReverseGeocodeSortByType "oh_ReverseGeocodeSortByType") | - | sortby |
 | StrictLanguageMode | [oh_BooleanType](datatypes_base.md#oh_BooleanType "oh_BooleanType") | - | strictlanguagemode |
 
 <a name="geocodeautocomplete" />

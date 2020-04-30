@@ -16,6 +16,12 @@ DEFINE CLASS oh_ReverseGeocodeModeType AS oh_EnumerationType
 
 ENDDEFINE
 
+DEFINE CLASS oh_ReverseGeocodeSortByType AS oh_EnumerationType
+
+	_Enumeration = "distance,population,size"
+
+ENDDEFINE
+
 DEFINE CLASS oh_MatchLevelType AS oh_EnumerationType
 
 	_Enumeration = "country,state,county,city,district,street,intersection,houseNumber,postalCode,landmark"

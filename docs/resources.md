@@ -30,7 +30,7 @@ Usually, the only methods that applications need to know about are `SetCredentia
 
 ```foxpro
 m.oh = CREATEOBJECT("overHere")
-m.oh.SetCredentials("{APP ID}", "{APP Code}")
+m.oh.SetCredentials("{API Key}")
 m.gc = m.oh.SetResource("GeocodeSearch")
 ```
 
