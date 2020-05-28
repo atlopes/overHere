@@ -1055,6 +1055,21 @@ ENDDEFINE
 DEFINE CLASS oh_LanguageCodeType AS oh_StringType
 ENDDEFINE
 
+DEFINE CLASS oh_ControlledStringType AS oh_StringType
+
+	RequireRegEx = .T.
+
+	FUNCTION IsValid (Input AS String) AS Logical
+
+		SAFETHIS
+
+		This.RegEx.Pattern = This.RegExPattern
+		RETURN This.RegEx.Test(m.Input)
+
+	ENDIF
+
+ENDDEFINE
+
 ******************************************************************************************************
 * base types
 ******************************************************************************************************
@@ -1096,6 +1111,96 @@ DEFINE CLASS oh_EnumerationType AS oh_Datatype
 	FUNCTION Parse (Input AS String) AS Logical
 
 		RETURN This.Set(m.Input)
+
+	ENDFUNC
+
+ENDDEFINE
+
+DEFINE CLASS oh_TimeType AS oh_Datatype
+
+	ADD OBJECT Hours AS oh_IntegerType WITH Minimum = 0, Maximum = 23
+	ADD OBJECT Minutes AS oh_IntegerType WITH Minimum = 0, Maximum = 59
+	ADD OBJECT Seconds AS oh_IntegerType WITH Minimum = 0, Maximum = 59
+	UTCOffset = .NULL.
+
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="hours" type="property" display="Hours" />' + ;
+						'<memberdata name="minutes" type="property" display="Minutes" />' + ;
+						'<memberdata name="seconds" type="property" display="Seconds" />' + ;
+						'<memberdata name="utcoffset" type="property" display="UTCOffset" />' + ;
+						'</VFPData>'
+
+	FUNCTION IsValid (Hours AS Integer, Minutes AS Integer, Seconds AS Integer, UTCOffset AS Integer) AS Logical
+
+		IF This.Hours.IsValid(m.Hours) AND This.Minutes.IsValid(m.Minutes) AND This.Seconds.IsValid(m.Seconds)
+			IF VARTYPE(m.UTCOffset) == "N"
+				RETURN BETWEEN(NVL(m.UTCOffset, 0), -12 * 60, 14 * 60) AND m.UTCOffset = INT(m.UTCOffset)
+			ELSE
+				RETURN VARTYPE(m.UTCOffset) == "L" AND !m.UTCOffset
+			ENDIF
+		ENDIF
+
+		RETURN .F.
+
+	ENDFUNC
+
+	FUNCTION Set (Hours AS Integer, Minutes AS Integer, Seconds AS Integer, UTCOffset AS Integer) AS Logical
+
+		SAFETHIS
+
+		This.Reset()
+		This.UTCOffset = .NULL.
+
+		IF This.Hours.Set(m.Hours) AND This.Minutes.Set(m.Minutes) AND This.Seconds.Set(m.Seconds)
+			This.Value = This.Seconds.Get() + This.Minutes.Get() * 60 + This.Hours.Get() * 3600
+			This.UTCOffset = IIF(PCOUNT() = 4 AND VARTYPE(m.UTCOffset) == "N", m.UTCOffset, .NULL.)
+			This._IsSet = .T.
+		ENDIF
+
+		RETURN This._IsSet
+
+	ENDFUNC
+
+	FUNCTION Parse (Input AS String) AS Logical
+
+		LOCAL Hours AS Integer
+		LOCAL Minutes AS Integer
+		LOCAL Seconds AS Integer
+		LOCAL Offset AS Integer
+
+		This.Reset()
+		IF !"*" $ m.Input AND CHRTRAN(LEFT(m.Input, 8), "0123456789", "**********") == "**:**:**"
+			m.Hours = VAL(LEFT(m.Input, 2))
+			m.Minutes = VAL(SUBSTR(m.Input, 4, 2))
+			m.Seconds = VAL(SUBSTR(m.Input, 7, 2))
+			DO CASE
+			CASE SUBSTR(m.Input, 9, 1) == "Z"
+				m.Offset = 0
+			CASE SUBSTR(m.Input, 9, 1) $ "-+" AND SUBSTR(m.Input, 12, 1) == ":"
+				m.Offset = VAL(SUBSTR(m.Input, 9, 3)) * 60 + VAL(SUBSTR(m.Input, 13, 2))
+			OTHERWISE
+				m.Offset = .F.
+			ENDCASE
+			This.Set(m.Hours, m.Minutes, m.Seconds, m.Offset)
+		ENDIF
+
+		RETURN This._IsSet
+
+	ENDFUNC
+
+	FUNCTION ToString () AS String
+
+		SAFETHIS
+
+		IF !This._IsSet
+			RETURN ""
+		ENDIF
+
+		RETURN TRANSFORM(This.Hours.Get(), "@L 99") + ":" + ;
+			TRANSFORM(This.Minutes.Get(), "@L 99") + ":" + ;
+			TRANSFORM(This.Seconds.Get(), "@L 99") + ;
+			IIF(ISNULL(This.UTCOffset), "", IIF(This.UTCOffset >= 0, "+", "-") + ;
+				TRANSFORM(INT(ABS(This.UTCOffset) / 60), "@L 99") + ":" + TRANSFORM(INT(ABS(This.UTCOffset) % 60), "@L 99"))
 
 	ENDFUNC
 
