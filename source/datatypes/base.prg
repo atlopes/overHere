@@ -723,6 +723,12 @@ DEFINE CLASS oh_SideOfStreetType AS oh_EnumerationType
 
 ENDDEFINE
 
+DEFINE CLASS oh_WeekDayType AS oh_EnumerationType
+
+	_Enumeration = "mo,tu,we,th,fr,sa,su"
+
+ENDDEFINE
+
 DEFINE CLASS oh_ValuesListType AS oh_Datatype
 
 	ValuesClass = "oh_StringType"
@@ -1097,21 +1103,37 @@ ENDDEFINE
 
 DEFINE CLASS oh_DatetimeType AS oh_Datatype
 
-	FUNCTION IsValid (Input AS Datetime) AS Logical
+	UTCOffset = .NULL.
 
-		RETURN VARTYPE(m.Input) == "T" AND !EMPTY(m.Input)
+	_MemberData = '<VFPData>' + ;
+						'<memberdata name="utcoffset" type="property" display="UTCOffset" />' + ;
+						'</VFPData>'
+
+	FUNCTION IsValid (Input AS Datetime, UTCOffset AS Integer) AS Logical
+
+		IF VARTYPE(m.Input) == "T" AND !EMPTY(m.Input)
+			IF VARTYPE(m.UTCOffset) == "N"
+				RETURN BETWEEN(NVL(m.UTCOffset, 0), -12 * 60, 14 * 60) AND m.UTCOffset = INT(m.UTCOffset)
+			ELSE
+				RETURN VARTYPE(m.UTCOffset) == "L" AND !m.UTCOffset
+			ENDIF
+		ENDIF
+
+		RETURN .F.
 
 	ENDFUNC
 
-	FUNCTION Set (Input AS Datetime) AS Logical
+	FUNCTION Set (Input AS Datetime, UTCOffset AS Integer) AS Logical
 
 		SAFETHIS
 
-		IF This.IsValid(m.Input)
+		This.Reset()
+		This.UTCOffset = .NULL.
+
+		IF (PCOUNT() = 1 AND This.IsValid(m.Input)) OR (PCOUNT() = 2 AND This.IsValid(m.Input, m.UTCOffset))
 			This.Value = m.Input
+			This.UTCOffset = IIF(PCOUNT() = 2 AND VARTYPE(m.UTCOffset) == "N", m.UTCOffset, .NULL.)
 			This._IsSet = .T.
-		ELSE
-			This._IsSet = .F.
 		ENDIF
 
 		RETURN This._IsSet
@@ -1121,14 +1143,23 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 	FUNCTION Parse (Input AS String) AS Logical
 
 		LOCAL Dt AS Datetime
+		LOCAL Offset AS Integer
 
 		TRY
-			m.Dt = EVALUATE("{^" + SUBSTR(LEFT(m.Input, 19), "T", " ") + "}")
+			m.Dt = EVALUATE("{^" + LEFT(m.Input, 19) + "}")
+			DO CASE
+			CASE SUBSTR(m.Input, 20, 1) == "Z"
+				m.Offset = 0
+			CASE SUBSTR(m.Input, 20, 1) $ "-+" AND SUBSTR(m.Input, 23, 1) == ":"
+				m.Offset = VAL(SUBSTR(m.Input, 20, 3)) * 60 + VAL(SUBSTR(m.Input, 24, 2))
+			OTHERWISE
+				m.Offset = .F.
+			ENDCASE
 		CATCH
-			m.Dt = {:}
+			m.Dt = {/:}
 		ENDTRY
 
-		RETURN This.Set(m.Dt)
+		RETURN This.Set(m.Dt, m.Offset)
 
 	ENDFUNC
 
@@ -1140,7 +1171,9 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 			RETURN ""
 		ENDIF
 
-		RETURN TTOC(This.Value, 3)
+		RETURN TTOC(This.Value, 3) + ;
+			IIF(ISNULL(This.UTCOffset), "", IIF(This.UTCOffset >= 0, "+", "-") + ;
+				TRANSFORM(INT(ABS(This.UTCOffset) / 60), "@L 99") + ":" + TRANSFORM(INT(ABS(This.UTCOffset) % 60), "@L 99"))
 
 	ENDFUNC
 
