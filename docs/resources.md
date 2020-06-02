@@ -4,6 +4,7 @@ Go to
 * [Maps resources](resources_maps.md "Maps")
 * [Geocode resources](resources_geocode.md "Geocode")
 * [Route resources](resources_route.md "Route")
+* [Fleet Telematics resources](resources_fleet.md "Fleet Telematics")
 * [Overview](../README.md "Overview")
 
 ## overHere Resources

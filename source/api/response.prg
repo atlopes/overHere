@@ -155,9 +155,9 @@ DEFINE CLASS oh_Response AS Custom
 
 		CASE m.Datatype == "T"
 			TRY
-				m.Value = EVALUATE("{^" + LEFT(CHRTRAN(m.Source.text, 'T', ' '), 19) + "}")
+				m.Value = EVALUATE("{^" + LEFT(m.Source.text, 19) + "}")
 			CATCH
-				m.Value = "{:}"
+				m.Value = "{/:}"
 			ENDTRY
 
 		OTHERWISE

@@ -17,10 +17,11 @@ Go to
 | <a name="oh_BooleanType"/>oh_BooleanType | [oh_Datatype](#oh_Datatype "oh_Datatype") | - | - |
 | <a name="oh_CardinalDirectionType"/>oh_CardinalDirectionType | [oh_EnumerationType](#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_ColorType"/>oh_ColorType | [oh_StringType](#oh_StringType "oh_StringType") | Input AS StringOrNumber | - |
+| <a name="oh_ControlledStringType"/>oh_ControlledStringType | [oh_StringType](#oh_StringType "oh_StringType") | - | - |
 | <a name="oh_CountryCodeType"/>oh_CountryCodeType | [oh_EnumerationType](#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_Datatype"/>oh_Datatype | [oh_Base](#oh_Base "oh_Base") | Value | - |
 | <a name="oh_DateType"/>oh_DateType | [oh_Datatype](#oh_Datatype "oh_Datatype") | Input AS Date | - |
-| <a name="oh_DatetimeType"/>oh_DatetimeType | [oh_Datatype](#oh_Datatype "oh_Datatype") | Input AS Datetime | - |
+| <a name="oh_DatetimeType"/>oh_DatetimeType | [oh_Datatype](#oh_Datatype "oh_Datatype") | Input AS Datetime, UTCOffset AS Integer | - |
 | <a name="oh_DistanceType"/>oh_DistanceType | [oh_DoubleType](#oh_DoubleType "oh_DoubleType") | - | - |
 | <a name="oh_DistanceUnitType"/>oh_DistanceUnitType | [oh_EnumerationType](#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_DoubleType"/>oh_DoubleType | [oh_Datatype](#oh_Datatype "oh_Datatype") | - | - |
@@ -48,9 +49,10 @@ Go to
 | <a name="oh_SideOfStreetType"/>oh_SideOfStreetType | [oh_EnumerationType](#oh_EnumerationType "oh_EnumerationType") | - | - |
 | <a name="oh_StringType"/>oh_StringType | [oh_Datatype](#oh_Datatype "oh_Datatype") | - | - |
 | <a name="oh_Structure"/>oh_Structure | [oh_Base](#oh_Base "oh_Base") | - | - |
+| <a name="oh_TimeType"/>oh_TimeType | [oh_Datatype](#oh_Datatype "oh_Datatype") | Hours AS Integer, Minutes AS Integer, Seconds AS Integer, UTCOffset AS Integer | - |
 | <a name="oh_ValuesListType"/>oh_ValuesListType | [oh_Datatype](#oh_Datatype "oh_Datatype") | Value | ElementIndex AS Integer |
 | <a name="oh_WKTShapeType"/>oh_WKTShapeType | [oh_GeoShapeType](#oh_GeoShapeType "oh_GeoShapeType") | - | - |
-
+| <a name="oh_WeekDayType"/>oh_WeekDayType | [oh_EnumerationType](#oh_EnumerationType "oh_EnumerationType") | - | - |
 
 <a name="response"/>
 
