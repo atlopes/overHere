@@ -1066,7 +1066,7 @@ DEFINE CLASS oh_ControlledStringType AS oh_StringType
 		This.RegEx.Pattern = This.RegExPattern
 		RETURN This.RegEx.Test(m.Input)
 
-	ENDIF
+	ENDFUNC
 
 ENDDEFINE
 
@@ -1554,7 +1554,12 @@ DEFINE CLASS oh_Structure AS oh_Base
 	_MemberData = '<VFPData>' + ;
 						'<memberdata name="members" type="property" display="Members" />' + ;
 						'<memberdata name="additionalmembers" type="property" display="AdditionalMembers" />' + ;
+						'<memberdata name="tocursor" type="property" display="ToCursor" />' + ;
 						'</VFPData>'
+
+	FUNCTION ToCursor (CursorName AS String, CursorType AS Integer, CursorParm AS AnyType) AS Integer
+		RETURN -1
+	ENDFUNC
 
 ENDDEFINE
 

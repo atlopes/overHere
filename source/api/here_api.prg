@@ -18,6 +18,7 @@ SET PATH TO (ADDBS(m.oh_Path) + "maps") ADDITIVE
 SET PATH TO (ADDBS(m.oh_Path) + "geocoding") ADDITIVE
 SET PATH TO (ADDBS(m.oh_Path) + "routing") ADDITIVE
 SET PATH TO (ADDBS(m.oh_Path) + "..\datatypes") ADDITIVE
+SET PATH TO (ADDBS(m.oh_Path) + "external") ADDITIVE
 
 DEFINE CLASS overHere AS Custom
 
