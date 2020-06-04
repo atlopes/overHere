@@ -47,15 +47,14 @@ In this demo, a map of New York is displayed in the VFP main window using the He
 **Install the libraries:**
 
 ```foxpro
-DO LOCFILE("here_api.prg")
-DO mapview.prg
+DO LOCFILE("here_loader.prg")
 ```
 
 **Instantiate an overHere API manager and set Here.com credentials:**
 
 ```foxpro
 m.oh = CREATEOBJECT("overHere")
-m.oh.SetCredentials("{APP ID}", "{APP Code}")  && or ("{API Key}")
+m.oh.SetCredentials("{your API Key}")
 ```
 
 **Instantiate a MapView object through the API manager:**
@@ -108,6 +107,8 @@ and a segment of the route, when it reaches the Portuguese-Spanish border. The o
 
 Some of the classes depend on `JsonToXML`, a simple Json to XML converter (see [VFP XML library set](https://github.com/atlopes/xml/) GitHub repository for details).
 
+For convenience, the required program files are stored in the `api\external` folder.
+
 ## Status
 
-In development. Unsuited for production. [Unlicensed](docs/UNLICENSE.md "Unlicense").
+In development. Unsuited for production, unless thoroughly tested on site. [Unlicensed](docs/UNLICENSE.md "Unlicense").
