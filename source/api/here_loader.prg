@@ -31,6 +31,7 @@ DO (m.oh_Group + "statistics")
 * geocoding resource classes
 m.oh_Group = m.oh_Path + "geocoding\"
 DO (m.oh_Group + "landmark")
+DO (m.oh_Group + "reverse")
 DO (m.oh_Group + "autocomplete")
 
 * routing resource classes

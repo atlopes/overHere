@@ -1277,7 +1277,7 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 		ENDIF
 
 		RETURN TTOC(This.Value, 3) + ;
-			IIF(ISNULL(This.UTCOffset), "", IIF(This.UTCOffset >= 0, "+", "-") + ;
+			IIF(ISNULL(This.UTCOffset), "Z", IIF(This.UTCOffset >= 0, "+", "-") + ;
 				TRANSFORM(INT(ABS(This.UTCOffset) / 60), "@L 99") + ":" + TRANSFORM(INT(ABS(This.UTCOffset) % 60), "@L 99"))
 
 	ENDFUNC
