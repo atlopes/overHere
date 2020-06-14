@@ -1248,15 +1248,24 @@ DEFINE CLASS oh_DatetimeType AS oh_Datatype
 	FUNCTION Parse (Input AS String) AS Logical
 
 		LOCAL Dt AS Datetime
+		LOCAL Tz AS String
 		LOCAL Offset AS Integer
 
 		TRY
-			m.Dt = EVALUATE("{^" + LEFT(m.Input, 19) + "}")
+			m.Tz = MAX(AT("Z", m.Input), RAT("-", m.Input) , AT("+", m.Input))
+			IF m.Tz >= 20
+				m.Dt = EVALUATE("{^" + LEFT(m.Input, m.Tz - 1) + "}")
+			ELSE
+				m.Tz = 0
+				m.Dt = EVALUATE("{^" + m.Input + "}")
+			ENDIF
 			DO CASE
-			CASE SUBSTR(m.Input, 20, 1) == "Z"
+			CASE m.Tz = 0
+				m.Offset = .F.
+			CASE SUBSTR(m.Input, m.Tz) == "Z"
 				m.Offset = 0
-			CASE SUBSTR(m.Input, 20, 1) $ "-+" AND SUBSTR(m.Input, 23, 1) == ":"
-				m.Offset = VAL(SUBSTR(m.Input, 20, 3)) * 60 + VAL(SUBSTR(m.Input, 24, 2))
+			CASE SUBSTR(m.Input, m.Tz, 1) $ "-+" AND SUBSTR(m.Input, m.Tz + 3, 1) == ":"
+				m.Offset = VAL(SUBSTR(m.Input, m.Tz, 3)) * 60 + VAL(SUBSTR(m.Input, m.Tz + 4, 2))
 			OTHERWISE
 				m.Offset = .F.
 			ENDCASE
