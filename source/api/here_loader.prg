@@ -13,7 +13,7 @@ m.oh_Path = ADDBS(JUSTPATH(SYS(16)))
 DO (m.oh_Path + "here_api")
 
 * datatypes classes
-m.oh_Group = m.oh_Path + "..\datatypes\"
+m.oh_Group = m.oh_Path + "..\datatypes\dt"
 DO (m.oh_Group + "base")
 DO (m.oh_Group + "maps")
 DO (m.oh_Group + "route")

@@ -399,7 +399,7 @@ DEFINE CLASS oh_Resource AS Custom
 		RETURN .F.
 	ENDFUNC
 
-	FUNCTION Async_Enabled (NewValue AS Logical)
+	FUNCTION AsyncEnabled_Assign (NewValue AS Logical)
 	ENDFUNC
 
 	FUNCTION Async_Assign (NewValue AS Logical)
