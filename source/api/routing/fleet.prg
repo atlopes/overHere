@@ -16,7 +16,7 @@ DO (ADDBS(JUSTPATH(SYS(16))) + "..\response")
 
 DEFINE CLASS oh_FleetTelematicsResource AS oh_Resource
 
-	ResourceURL = "https://wse.ls.hereapi.com"
-	ResourcePath = "/2/"
+	ResourceURL = "https://wps.hereapi.com"
+	ResourcePath = "/v8/"
 
 ENDDEFINE

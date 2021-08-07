@@ -14,7 +14,7 @@ DO (ADDBS(JUSTPATH(SYS(16))) + "fleet.prg")
 
 DEFINE CLASS oh_FindSequence AS oh_FleetTelematicsResource
 
-	ResourceName = "findsequence.json"
+	ResourceName = "findsequence2"
 	PostQueryString = .T.
 
 	* itinerary definition
